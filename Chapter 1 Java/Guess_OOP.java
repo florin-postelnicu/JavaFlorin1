@@ -23,12 +23,14 @@ public class Guess_OOP {
         String answer = scan.next() ;
 
         if( answer.equals("y")){
-            Guess_OOP.another_game = true;
+
             Guess_OOP game = new Guess_OOP();
-            int computer_choice = (int)(Math.random()*range + min);
+            Guess_OOP.computer_choice = (int)(Math.random()*range )+ min;
+            game.keep_playing(Guess_OOP.play_again);
         }
         else {
             Guess_OOP.another_game = false;
+            Guess_OOP.play_again =true;
             System.out.println("Bye - Bye !");
         }
 
@@ -52,7 +54,8 @@ public class Guess_OOP {
             myTemplate( my_guess,computer_choice);
 
             System.out.println("Congrats!!");
-            play_again = false;
+            Guess_OOP.Start_game(Guess_OOP.another_game);
+
 
 
 
@@ -62,8 +65,8 @@ public class Guess_OOP {
 
             myTemplate( my_guess,computer_choice);
             System.out.println("Sorry, bayby some other time");
-            Guess_OOP.
-            another_game = true;
+
+            Guess_OOP.keep_playing(Guess_OOP.play_again);
 
 
 
@@ -79,9 +82,7 @@ class Test_Game {
      public static void main(String[] args) {
          //initiate Guess_OOP instances
          Guess_OOP gamer = new Guess_OOP();
-         while(Guess_OOP.another_game){
-
-            gamer.keep_playing(Guess_OOP.another_game);}
+         gamer.Start_game(Guess_OOP.another_game);
 
 
 
