@@ -18,7 +18,6 @@ class Guess_OOP {
         String answer = scan.next() ;
 
         if( answer.equals("y")){
-//            Guess_OOP game = new Guess_OOP();
             computer_choice = (int)(Math.random()*range )+ min;
             Keep_Playing();
         }
@@ -43,7 +42,7 @@ class Guess_OOP {
             Start_game();
         }
         else{
-//            myTemplate( my_guess,computer_choice);
+
             System.out.println("Sorry, baby, maybe  next time! Keep trying!");
             Keep_Playing();
         }
