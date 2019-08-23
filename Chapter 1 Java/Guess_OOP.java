@@ -4,7 +4,7 @@ import java.lang.Math;
 
 
 class Guess_OOP {
-    // Enter the variables
+    // Set the variables
 
     private static int max = 10;
     private static  int min = 1;
