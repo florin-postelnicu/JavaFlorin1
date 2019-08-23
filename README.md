@@ -11,7 +11,7 @@ itself, not with any particular object created from the class. As a result, you 
 
 before you can use static methods defined by the class.
 
-The best-known static method is main, which is called by the Java runtime to start an application. The main method must be
+The best-known static method is main, which is called by the Java runtime to start an application. The main method must be 
 
 static, which means that applications run in a static context by default.
 
