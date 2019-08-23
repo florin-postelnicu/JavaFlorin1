@@ -18,7 +18,6 @@ class Guess_OOP {
         String answer = scan.next() ;
 
         if( answer.equals("y")){
-//            Guess_OOP game = new Guess_OOP();
             Guess_OOP.computer_choice = (int)(Math.random()*range )+ min;
             Guess_OOP.keep_playing();
         }
