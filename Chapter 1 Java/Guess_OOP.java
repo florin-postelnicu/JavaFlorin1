@@ -43,7 +43,7 @@ class Guess_OOP {
             Guess_OOP.Start_game();
         }
         else{
-//            myTemplate( my_guess,computer_choice);
+
             System.out.println("Sorry, baby, maybe  next time! Keep trying!");
             Guess_OOP.keep_playing();
         }
