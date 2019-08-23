@@ -18,33 +18,34 @@ class Guess_OOP {
         String answer = scan.next() ;
 
         if( answer.equals("y")){
-            Guess_OOP.computer_choice = (int)(Math.random()*range )+ min;
-            Guess_OOP.keep_playing();
+//            Guess_OOP game = new Guess_OOP();
+            computer_choice = (int)(Math.random()*range )+ min;
+            Keep_Playing();
         }
         else {
             System.out.println("Bye - Bye !");
         }
     }
     // Display message method
-    private static void myTemplate(int my_guess, int guess){
+    private static void Display_message(int my_guess, int guess){
         System.out.println(" My guess is  "+ my_guess);
         System.out.println("The Computer's guess is "+ guess);
     }
     //Continue  Play method
-    private static  void keep_playing(){
+    private static  void Keep_Playing(){
 
         System.out.println("Enter your guess, an integer between 1 and 10");
         Scanner scan = new Scanner(System.in);
         int my_guess = scan.nextInt();
         if( my_guess == computer_choice){
-            myTemplate( my_guess,computer_choice);
+            Display_message( my_guess,computer_choice);
             System.out.println("Congrats!!");
-            Guess_OOP.Start_game();
+            Start_game();
         }
         else{
-
+//            myTemplate( my_guess,computer_choice);
             System.out.println("Sorry, baby, maybe  next time! Keep trying!");
-            Guess_OOP.keep_playing();
+            Keep_Playing();
         }
     }
 }
@@ -53,3 +54,4 @@ class Test_Game {
         Guess_OOP.Start_game();
     }
 }
+
