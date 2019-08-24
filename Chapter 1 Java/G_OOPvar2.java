@@ -8,7 +8,7 @@ import java.lang.Math;
 class G_OOPvar2 {
     // Enter the variables
 
-    private  int max = 10;
+    private  int max = 1000;
     private   int min = 1;
     private  int range = max - min;
     private  int computer_choice ;
@@ -39,7 +39,7 @@ class G_OOPvar2 {
 
     private  void Keep_Playing(){
 
-        System.out.println("Enter your guess, an integer between 1 and 10");
+        System.out.println("Enter your guess, an integer between 1 and 1000");
         Scanner scan = new Scanner(System.in);
         int my_guess = scan.nextInt();
         if( my_guess == computer_choice){
@@ -48,11 +48,17 @@ class G_OOPvar2 {
             Start_game();
         }
         else{
-            System.out.println("Sorry, baby, maybe  next time! Keep trying!");
-            Keep_Playing();
+            if(my_guess< computer_choice){
+            System.out.println("Sorry, baby, maybe  next time! Keep trying! Your guess is too low");
+            Keep_Playing();}
+            else{
+                System.out.println("Sorry, baby, maybe  next time! Keep trying! Your guess is too high");
+                Keep_Playing();}
+            }
         }
     }
-}
+
+
 class Test_Game1 {
 
     public static void main(String[] args) {
