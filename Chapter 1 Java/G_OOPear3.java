@@ -83,7 +83,8 @@ import java.util.Scanner;
         }
 
     private void Your_guess_is(String bearing) {
-        System.out.println("Sorry Master, maybe  next time! Keep trying!It seems that Eddie's guess was " + bearing +"\n\tEddie have guessed :" + count + "\ttime(s)");
+        System.out.println("Sorry Master, maybe  next time! Keep trying!It seems that Eddie's guess was " 
+                           + bearing +"\n\tEddie have guessed :" + count + "\ttime(s)");
     }
 }
 
