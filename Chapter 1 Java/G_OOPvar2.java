@@ -1,5 +1,9 @@
 /*
 Guess computer's number with recursive functions
+Note:
+All private attributes can be used only by the class where they are created,
+G_OOPvar2
+Start_game() can not be private, since it is used by class Test_Game1.
 */
 
 import java.util.Scanner ;
