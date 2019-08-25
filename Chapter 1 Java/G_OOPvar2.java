@@ -1,7 +1,8 @@
-
+/*
+Guess computer's number with recursive functions
+*/
 
 import java.util.Scanner ;
-
 import java.lang.Math;
 
 
