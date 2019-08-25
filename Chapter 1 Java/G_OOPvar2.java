@@ -4,6 +4,15 @@ Note:
 All private attributes can be used only by the class where they are created,
 G_OOPvar2
 Start_game() can not be private, since it is used by class Test_Game1.
+A non static method can be used in a static environment if it is generated
+an instance of the class containing the method 
+In class Test_Game1 the Start_game() method of G_OOPvar2 is invoked by instancieting 
+
+G_OOPvar2 game = new G_OOPvar2();
+
+The invokation:
+
+game.Start_game();
 */
 
 import java.util.Scanner ;
