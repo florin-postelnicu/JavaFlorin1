@@ -33,7 +33,7 @@ class G_OOPvar2 {
     // Display message method
     private void Display_message(int my_guess, int guess){
 
-        System.out.println(" My guess is  "+ my_guess);
+        System.out.println("My guess is  "+ my_guess);
         System.out.println("The Computer's guess is "+ guess);
 
     }
