@@ -37,7 +37,7 @@ class G_OOPvar2 {
         System.out.println("The Computer's guess is "+ guess);
 
     }
-    private void Current_message(String bearing ){
+    private void Your_guess_is(String bearing ){
         System.out.println("Sorry, baby, maybe  next time! Keep trying! Your guess is too "
                 + bearing + "\n\tyou have asked :" + count + "\tquestions");
 
@@ -57,10 +57,10 @@ class G_OOPvar2 {
         }
         else{
             if(my_guess< computer_choice){
-                Current_message("low");
+                Your_guess_is("low");
             Keep_Playing();}
             else{
-                Current_message("high");
+                Your_guess_is("high");
                 Keep_Playing();}
             }
         }
