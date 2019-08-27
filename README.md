@@ -32,25 +32,32 @@ A method should not be marked as pure if it does not produce a side effect by it
 
 A contract is a set of clauses that describe an input and an output. They are separated with the -> symbol: "A -> B". This forms a contract meaning that when you provide A to a method, you will always get B. Clauses in a contract must be separated with the ; (semicolon) symbol. For example:
 
-@Contract("_, null -> null")	
+@Contract("_,null -> null")	
+
 The method returns null if its second argument is null.
 
 @Contract("_, null -> null; _, !null -> !null")	
+
 The method returns null if its second argument is null, and not-null otherwise.
 
 @Contract("true -> fail")	
+
 A typical assertFalse() method which throws an exception if true is passed to it.
 
 @Contract("_ -> this")	
+
 The method always returns its qualifier (e.g. StringBuilder.append).
 
 @Contract("null -> fail; _ -> param1")	
+
 The method throws an exception if the first argument is null, otherwise it returns the first argument (for example, Objects.requireNonNull).
 
 @Contract("!null, _ -> param1; null, !null -> param2; null, null -> fail")	
+
 The method returns the first non-null argument, or throws an exception if both arguments are null (for example, Objects.requireNonNullElse in Java 9).
 
 Define a contract #
+
 Press Alt+Enter on a method, and select Add method contract or Edit method contract.
 
 Configure the contract and apply the changes.
@@ -60,11 +67,17 @@ Syntax #
 The @Contract annotation value has the following syntax:
 
 contract ::= (clause ‘;’)* clause
+
 clause ::= args ‘->’ effect
+
 args ::= ((arg ‘,’)* arg )?
+
 arg ::= value-constraint
+
 value-constraint ::= ‘_’ | ‘null’ | ‘!null’ | ‘false’ | ‘true’
+
 effect ::= ‘_’ | ‘null’ | ‘!null’ | ‘false’ | ‘true’ | ‘fail’ | ‘new’ | ‘this’ | ‘param’ number
+
 number ::= [1-9] [0-9]*
 
 The constraints are:
@@ -73,25 +86,33 @@ _
 Any value
 
 null	
+
 Null value
 
 !null	
+
 Value statically proved not to be null
 
 true	
+
 True boolean value
 
 false	
+
 False boolean value
 
 fail	
+
 The method throws an exception if arguments meet argument constraints
 
 new	
+
 Every time the method is executed, it returns a non-null new object that is distinct from other objects existing in the heap prior to method execution. If the method is pure, the new object is not stored in any field or array and will be lost if method return value is not used.
 
 this	
+
 The method returns non-null this reference
 
 param1 (param2, param3, and so on)	
+
 The method returns its first (second, third, and so on) argument
