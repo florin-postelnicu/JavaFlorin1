@@ -4,6 +4,8 @@ Choose an integer between 1 and 1000
  */
 
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Scanner;
 
  class G_OOPear3 {
@@ -34,12 +36,15 @@ import java.util.Scanner;
 
     // Getters
 
+    @Contract(pure = true)
     private int getMax() {
         return max;
     }
+    @Contract(pure = true)
     private int getMin() {
         return min;
     }
+    @Contract(pure = true)
     private int Computer_Guess(int low, int high) {
         return low + (high - low) / 2;
     }
