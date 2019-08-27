@@ -10,7 +10,14 @@ import java.util.Scanner;
 
  class G_OOPear3 {
 
-    // constructor for initial values
+
+     private int min ;
+     private int max ;
+     private int computer_guess;
+     private int count ;
+
+
+     // constructor for initial values
      G_OOPear3(){
          min = 1;
          max = 1024;
@@ -18,13 +25,7 @@ import java.util.Scanner;
          computer_guess= Computer_Guess(getMin(), getMax());
 
      }
-
-
-    private int min ;
-    private int max ;
-    private int computer_guess;
-    private int count ;
-
+     
     // Setters
 
     private void setMax(int a) {
