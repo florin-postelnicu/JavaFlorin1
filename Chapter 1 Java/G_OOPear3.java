@@ -8,11 +8,20 @@ import java.util.Scanner;
 
  class G_OOPear3 {
 
+    // constructor for initial values
+     G_OOPear3(){
+         min = 1;
+         max = 1024;
+         count = 0;
+         computer_guess= Computer_Guess(getMin(), getMax());
 
-    private int min = 1;
-    private int max = 1024;
+     }
+
+
+    private int min ;
+    private int max ;
     private int computer_guess;
-    private int count = 0;
+    private int count ;
 
     // Setters
 
@@ -40,11 +49,8 @@ import java.util.Scanner;
         Scanner scan = new Scanner(System.in);
         String answer = scan.next();
         if (answer.equals("y")) {
-            setMin(1);
-            setMax(1000);
-            count = 0;
-            computer_guess = Computer_Guess(getMin(), getMax());
-            Keep_Playing();
+            G_OOPear3 start = new G_OOPear3();// using constructor to instantiate a new game
+            start.Keep_Playing();
         } else {
 
             System.out.println("Bye - Bye !");
@@ -83,8 +89,7 @@ import java.util.Scanner;
         }
 
     private void Your_guess_is(String bearing) {
-        System.out.println("Sorry Master, maybe  next time! Keep trying!It seems that Eddie's guess was " 
-                           + bearing +"\n\tEddie has guessed :" + count + "\ttime(s)");
+        System.out.println("Sorry Master, maybe  next time! Keep trying!It seems that Eddie's guess was " + bearing +"\n\tEddie has guessed :" + count + "\ttime(s)");
     }
 }
 
