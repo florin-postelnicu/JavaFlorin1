@@ -1,6 +1,6 @@
 /*
 The computer would guess your number.
-Choose an integer between 1 and 1000
+Choose an integer between min and max-1
  */
 
 
