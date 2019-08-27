@@ -1,6 +1,6 @@
 /*
 The computer would guess your number.
-Choose an integer between min and max-1
+Choose an integer between 1 and 1000
  */
 
 
@@ -19,13 +19,16 @@ import java.util.Scanner;
 
      // constructor for initial values
      G_OOPear3(){
+         initGAME();
+     }
+
+     private void initGAME() {
          min = 1;
-         max = 1024;
+         max = 1025;
          count = 0;
          computer_guess= Computer_Guess(getMin(), getMax());
-
      }
-     
+
     // Setters
 
     private void setMax(int a) {
