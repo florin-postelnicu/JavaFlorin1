@@ -8,7 +8,8 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
- class GUI4Pear implements ActionListener {
+class GUI4Pear  implements ActionListener {
+
 
      String bearing;
 
@@ -21,41 +22,30 @@ import javax.swing.JFrame;
          JButton play_g = new JButton("Keep_Playing");
          JButton decide_g = new JButton("Choose l-h-e");
          frame.add(start_g, BorderLayout.WEST);
-         start_g.addActionListener((ButtonStart) new ButtonStart());
+         start_g.addActionListener(event -> gamer.Start_game());
          frame.add(play_g, BorderLayout.CENTER);
+         play_g.addActionListener((event -> gamer.Keep_Playing()));
          frame.add(decide_g, BorderLayout.EAST);
+         decide_g.addActionListener(event -> gamer.Your_guess_is(bearing));
          frame.setLayout(new FlowLayout());
          frame.setSize(600, 300);
          frame.setVisible(true);
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-     }
 
-
-     class ButtonStart extends JButton {
-
-         public  void actionPerformed(ActionListener event) {
-             gamer.Start_game();
 
          }
-     }
-
-     class ButtonKeepPlaying extends JButton {
-         JButton button_keep_playing = new JButton("Keep_Playing");
-
-         public void actionPerformed(ActionListener event) {
-             gamer.Keep_Playing();
-
+         public void actionPerformed(ActionEvent e) {
+         throw new UnsupportedOperationException("Not supported yet");
          }
 
-     }
 
-     class ButtonDecide extends JButton {
-         public void actionPerformed(ActionListener event) {
-             JButton button_decide = new JButton("Choose :l-h-e");
-             gamer.Your_guess_is(bearing);
 
-         }
-     }
+
+
+
+
+
+
  }
 class Test3 {
     public static void main(String[] args) {
