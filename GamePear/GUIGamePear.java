@@ -45,7 +45,6 @@ class GUI4Pear  implements ActionListener {
 
          JButton quit_g = new JButton("Quit");
          frame.add(quit_g);
-
          quit_g.addActionListener(event -> System.exit(0));
 
 
@@ -61,16 +60,6 @@ class GUI4Pear  implements ActionListener {
          public void actionPerformed(ActionEvent e) {
          throw new UnsupportedOperationException("Not supported yet");
          }
-
-
-
-
-
-
-
-
-
-
  }
 class Test3 {
     public static void main(String[] args) {
