@@ -1,0 +1,7 @@
+ 
+
+You need to make an OutputStream that re-directs output to the text area 
+
+and that implements all the necessary methods of the OutputStream interface, and then in your main program, 
+
+redirect your Standard output into this stream. I've used something like this for one of my programs:
