@@ -7,6 +7,7 @@ import java.io.PrintStream;
 ;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.text.BadLocationException;
 
 class GamePearGUI  implements ActionListener {
 
@@ -24,16 +25,32 @@ class GamePearGUI  implements ActionListener {
 
 
         JButton yes_g = new JButton("PLAY");
-        JButton no_g = new JButton("NO");
+        JButton no_g = new JButton("CLEAR ");
         JButton less_g = new JButton("LOWER");
         JButton greater_g = new JButton("GREATER");
         JButton equal_g = new JButton("EQUAL");
+
+        JTextArea textArea = new JTextArea(50,50);
+        PrintStream standardOut = System.out;
 
         frame.add(yes_g);
         yes_g.addActionListener(event -> game_pear.Start_game());
 
         frame.add(no_g);
-        no_g.addActionListener(event -> game_pear.Stop_Playing());
+//        no_g.addActionListener(event -> game_pear.Stop_Playing());
+        no_g.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                // clears the text area
+                try {
+                    textArea.getDocument().remove(0,
+                            textArea.getDocument().getLength());
+                    standardOut.println("Text area cleared");
+                } catch (BadLocationException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
 
         frame.add(less_g);
         less_g.addActionListener(event -> game_pear.choose_less());
@@ -49,8 +66,16 @@ class GamePearGUI  implements ActionListener {
 
         quit_g.addActionListener(event -> System.exit(0));
 
-        JTextArea textArea = new JTextArea(50,50);
         PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+
+        textArea.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.anchor = GridBagConstraints.WEST;
+
+        frame.add(new JScrollPane(textArea), constraints);
         System.setOut(printStream);
         System.setErr(printStream);
 
