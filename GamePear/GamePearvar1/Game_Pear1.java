@@ -7,7 +7,7 @@ Choose an integer between min and max - 1
 
 
 class Game_Pear {
-    public String msg ="Guess a number between 1 and 1000";
+    public String msg ="Guess a number between 1 and 1000. PLAY";
 
    private int min ;
    private int max ;
@@ -74,7 +74,7 @@ class Game_Pear {
     void choose_less(){
         count++;
 
-        msg = "Your choice was higher";
+        msg = "You chose LOWER than :" + computer_guess;
         Display();
         setMax(computer_guess);
         Keep_Playing();
@@ -82,7 +82,7 @@ class Game_Pear {
     void choose_greater() {
 
         count++;
-        msg = "Your choice was lower";
+        msg = "You chose GREATER than :" + computer_guess;
         Display();
         setMin(computer_guess);
         Keep_Playing();
@@ -95,7 +95,7 @@ class Game_Pear {
 
     }
     void  Display(){
-        
+//
         System.out.println(msg);;
 
     }
