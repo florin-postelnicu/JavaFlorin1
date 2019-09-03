@@ -1,1 +1,84 @@
-The outvome from console is redirected to the text area from GUI
+There were some major problems to solve within this GUI:
+
+1)The outcome from console is redirected to the text area from GUI
+
+2) The textArea has a vertical scrol bar that is always visible
+
+and, it has as well a word wrap within text area
+3) Clear all button
+
+4) Choosing a Layout appropriate . Although that was the simplest to fix just by changing
+  frame.getContentPane().setLayout(new GridLayout(3, 3));
+
+to
+  frame.getContentPane().setLayout(new FlowLayout());
+  it took me a lot to get it.
+  
+  Solutions:
+  2) Adding a permanenet Vertical Scrolling Bar
+
+JTextArea textArea = new JTextArea(60,60);
+        textArea.setLineWrap(true);
+        JScrollPane scroller = new JScrollPane(textArea);
+        scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        panel.add(scroller);
+
+   frame.getContentPane().add(scroller);
+   
+   
+  1) Redirect the console's outcome to the text Area 
+
+The key to the program is the class CustomOutputStream
+
+import java.io.IOException;
+import java.io.OutputStream;
+
+import javax.swing.JTextArea;
+
+/**
+ * This class extends from OutputStream to redirect output to a JTextArrea
+ * @author www.codejava.net
+ *
+ */
+public class CustomOutputStream extends OutputStream {
+    private JTextArea textArea;
+
+    public CustomOutputStream(JTextArea textArea) {
+        this.textArea = textArea;
+    }
+
+    @Override
+    public void write(int b) throws IOException {
+        // redirects data to the text area
+        textArea.append(String.valueOf((char) b));
+        // scrolls the text area to the end of data
+        textArea.setCaretPosition(textArea.getDocument().getLength());
+    }
+}
+
+In the actual GUI class these are the important three lines that redirect the console output to the text area
+
+
+        PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
+
+        System.setOut(printStream);
+        System.setErr(printStream);
+        
+  3) CLEAR all button      
+       
+  The GUI has as well a CLEAR button . When clicked the text area clears up( the remove(0, textArea.getDocument().getLength())
+  
+  
+        no_g.addActionListener(evt -> {
+            // clears the text area
+            try {
+                textArea.getDocument().remove(0,
+                        textArea.getDocument().getLength());
+                standardOut.println("Text area cleared");
+                game_pear.Start_game();
+
+            } catch (BadLocationException ex) {
+                ex.printStackTrace();
+            }
+        } );
