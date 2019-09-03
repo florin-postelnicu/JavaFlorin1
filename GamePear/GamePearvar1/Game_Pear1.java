@@ -7,16 +7,16 @@ Choose an integer between min and max - 1
 
 
 class Game_Pear {
-    public String msg = "Press Yes to play";
+    public String msg ="Guess a number between 1 and 1000";
 
    private int min ;
    private int max ;
-    public int computer_guess;
+   private int computer_guess;
     public int count ;
 
     // constructor for initial values
 
-    Game_Pear(){
+    public Game_Pear(){
         initGAME();
     }
 
@@ -25,7 +25,7 @@ class Game_Pear {
     private void initGAME() {
         min = 1;
         max = 1025;
-        count = 0;
+        count = 1;
         computer_guess= Computer_Guess(getMin(), getMax());
     }
 
@@ -40,13 +40,13 @@ class Game_Pear {
 
     // Getters
 
-    public int getMax() {
+    private int getMax() {
         return max;
     }
-   public int getMin() {
+   private int getMin() {
         return min;
     }
-   public int Computer_Guess(int low, int high) {
+   private int Computer_Guess(int low, int high) {
         return low + (high - low) / 2;
     }
 
@@ -54,10 +54,13 @@ class Game_Pear {
 
     void Start_game() {
 
-        msg = "Press YES to play";
+        msg = "Good Luck guessing the computer's choice, an integer between 1 and 1000";
         Display();
-        Game_Pear start = new Game_Pear();// using constructor to instantiate a new game
-        start.Keep_Playing();
+        min = 1;
+        max = 1025;
+        count = 1;
+        computer_guess= Computer_Guess(getMin(), getMax());
+        Keep_Playing();
     }
 
 
@@ -92,17 +95,17 @@ class Game_Pear {
 
     }
     void  Display(){
-        System.out.println(msg);
+//
+        System.out.println(msg);;
 
     }
 
-
     // Keep playing Method
 
-    void Keep_Playing() {
+    private void Keep_Playing() {
 
         computer_guess = Computer_Guess(getMin(), getMax());
-        msg = "Is your choice LOWER, HIGHER , or EQUAL to the computer's guess  : " + computer_guess + " there are "+ count +" questions";
+        msg = "Is your choice LOWER, HIGHER , or EQUAL to the computer's guess  : " + computer_guess + "? "+ count +" questions ";
         Display();
     }
 
