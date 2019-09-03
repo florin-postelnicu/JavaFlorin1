@@ -17,7 +17,7 @@ class GamePearGUI  implements ActionListener {
     GamePearGUI() {
         JFrame frame = new JFrame("Eddie's  Guessing Game ");
         JPanel panel = new JPanel();
-        frame.getContentPane().setLayout(new GridLayout(3,3));
+        frame.getContentPane().setLayout(new FlowLayout());
 
 
         JLabel label1 = new JLabel();
@@ -38,7 +38,7 @@ class GamePearGUI  implements ActionListener {
         JButton quit_g = new JButton("Quit");
 //        quit_g.setBounds(10,21,60,10);
 
-        JTextArea textArea = new JTextArea(80,60);
+        JTextArea textArea = new JTextArea(60,60);
         textArea.setLineWrap(true);
         JScrollPane scroller = new JScrollPane(textArea);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
