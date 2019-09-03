@@ -1,7 +1,9 @@
 
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.Font;
 import java.awt.event.*;
 import java.io.PrintStream;
 
@@ -11,7 +13,7 @@ import javax.swing.text.BadLocationException;
 
 class GamePearGUI  implements ActionListener {
 
-    Game_Pear game_pear = new Game_Pear();
+    Game_Pear1 game_pear = new Game_Pear1();
 
 
     GamePearGUI() {
@@ -38,12 +40,15 @@ class GamePearGUI  implements ActionListener {
         JButton quit_g = new JButton("Quit");
 //        quit_g.setBounds(10,21,60,10);
 
-        JTextArea textArea = new JTextArea(60,60);
+        JTextArea textArea = new JTextArea(25,60);
+
         textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
         JScrollPane scroller = new JScrollPane(textArea);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.add(scroller);
+        textArea.setFont(new Font("Serif", Font.BOLD,  24));
 
 
         PrintStream standardOut = System.out;
@@ -72,7 +77,7 @@ class GamePearGUI  implements ActionListener {
         frame.add(greater_g);
         greater_g.addActionListener(event -> game_pear.choose_greater());
 
-         frame.add(equal_g);
+        frame.add(equal_g);
         equal_g.addActionListener(event ->game_pear.choose_equal());
 
 
@@ -99,11 +104,11 @@ class GamePearGUI  implements ActionListener {
         throw new UnsupportedOperationException("Not supported yet");
     }
 
-    }
+}
 
 class Test4 {
     public static void main(String[] args) {
-       new GamePearGUI();
+        new GamePearGUI();
 
     }
 }
