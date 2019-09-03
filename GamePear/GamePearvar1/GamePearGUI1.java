@@ -42,7 +42,7 @@ class GamePearGUI  implements ActionListener {
         textArea.setLineWrap(true);
         JScrollPane scroller = new JScrollPane(textArea);
         scroller.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.add(scroller);
 
 
@@ -85,7 +85,7 @@ class GamePearGUI  implements ActionListener {
         System.setOut(printStream);
         System.setErr(printStream);
 
-        frame.getContentPane();
+        frame.getContentPane().add(scroller);
         frame.add(panel);
         frame.add(label1);
         frame.setSize(600, 300);
