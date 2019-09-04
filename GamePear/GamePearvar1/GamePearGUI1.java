@@ -52,7 +52,6 @@ class GamePearGUI  implements ActionListener {
         textArea.setFont(new Font("Serif", Font.BOLD,  24));
 
 
-        PrintStream standardOut = System.out;
 
         frame.add(yes_g);
         yes_g.addActionListener(event -> game_pear.Start_game());
@@ -60,6 +59,8 @@ class GamePearGUI  implements ActionListener {
         frame.add(no_g);
 
         // This is the CLEAR Button
+        
+        PrintStream standardOut = System.out;
         no_g.addActionListener(evt -> {
             // clears the text area
             try {
