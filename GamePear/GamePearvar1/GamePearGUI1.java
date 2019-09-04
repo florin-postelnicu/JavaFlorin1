@@ -42,6 +42,7 @@ class GamePearGUI  implements ActionListener {
 
         JTextArea textArea = new JTextArea(25,60);
 
+        // This is the scrolling feature of the textArea
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
         JScrollPane scroller = new JScrollPane(textArea);
@@ -58,6 +59,7 @@ class GamePearGUI  implements ActionListener {
 
         frame.add(no_g);
 
+        // This is the CLEAR Button
         no_g.addActionListener(evt -> {
             // clears the text area
             try {
@@ -70,7 +72,7 @@ class GamePearGUI  implements ActionListener {
                 ex.printStackTrace();
             }
         } );
-
+// End of the CLEAR procedure
         frame.add(less_g);
         less_g.addActionListener(event -> game_pear.choose_less());
 
@@ -85,11 +87,12 @@ class GamePearGUI  implements ActionListener {
 
         quit_g.addActionListener(event -> System.exit(0));
 
+        // The next three lines redirect the console's print to the JTextArea
+        
         PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
-
         System.setOut(printStream);
         System.setErr(printStream);
-
+// ******
         frame.getContentPane().add(scroller);
         frame.add(panel);
         frame.add(label1);
