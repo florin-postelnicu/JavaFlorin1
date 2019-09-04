@@ -1,4 +1,5 @@
 
+
 /*
 The computer would guess your number.
 Choose an integer between min and max - 1
@@ -9,10 +10,10 @@ Choose an integer between min and max - 1
 class Game_Pear1 {
     public String msg ="Guess a number between 1 and 1000. PLAY";
 
-   private int min ;
-   private int max ;
-   private int range ;
-   private int computer_guess;
+    private int min ;
+    private int max ;
+    private int range ;
+    private int computer_guess;
     public int count ;
 
     // constructor for initial values
@@ -25,7 +26,7 @@ class Game_Pear1 {
 
     private void initGAME() {
         min = 1;
-        max = 1024;
+        max = 1001;
         count = 1;
         computer_guess = Computer_Guess(getMin(), getMax());
     }
@@ -47,7 +48,7 @@ class Game_Pear1 {
     private int getMax() {
         return max;
     }
-   private int getMin() {
+    private int getMin() {
         return min;
     }
 
@@ -55,16 +56,16 @@ class Game_Pear1 {
         range = high - low;
         return range;
     }
-   private int Computer_Guess(int low, int high) {
+    private int Computer_Guess(int low, int high) {
 
-           return low + (high - low) / 2;
-       }
+        return low + (high - low) / 2;
+    }
 
     // Start the game method
 
     void Start_game() {
 
-        msg = "Good Luck guessing the computer's choice, an integer between 1 and 1000\n\n";
+        msg = "Choose a number between 1 and 1000.\nEddie is going to guess it! \n\n";
         Display();
         initGAME();
         Keep_Playing();
@@ -118,14 +119,14 @@ class Game_Pear1 {
         }
         else {
 
-        computer_guess = Computer_Guess(getMin(), getMax());
-        msg = "Is your choice LOWER, GREATER , or EQUAL to the computer's guess  : " + computer_guess + "? "+ count +" questions ";
+            computer_guess = Computer_Guess(getMin(), getMax());
+            msg = "Is your choice LOWER, GREATER , or EQUAL to the computer's guess  : " + computer_guess + "? "+ count +" questions ";
             Display();
 
-    }
+        }
 
 
 
-}}
+    }}
 
 
