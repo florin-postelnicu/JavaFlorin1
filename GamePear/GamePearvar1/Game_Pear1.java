@@ -25,7 +25,7 @@ class Game_Pear1 {
 
     private void initGAME() {
         min = 1;
-        max = 1024;
+        max = 1001;
         count = 1;
         computer_guess = Computer_Guess(getMin(), getMax());
     }
