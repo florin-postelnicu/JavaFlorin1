@@ -25,7 +25,7 @@ class Game_Pear1 {
 
     private void initGAME() {
         min = 1;
-        max = 1001;
+        max = 1024;
         count = 1;
         computer_guess = Computer_Guess(getMin(), getMax());
     }
@@ -64,12 +64,9 @@ class Game_Pear1 {
 
     void Start_game() {
 
-        msg = "Good Luck guessing the computer's choice, an integer between 1 and 1000";
+        msg = "Good Luck guessing the computer's choice, an integer between 1 and 1000\n\n";
         Display();
-        min = 1;
-        max = 1001;
-        count = 1;
-        computer_guess= Computer_Guess(getMin(), getMax());
+        initGAME();
         Keep_Playing();
     }
 
