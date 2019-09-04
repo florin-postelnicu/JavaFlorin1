@@ -6,17 +6,18 @@ Choose an integer between min and max - 1
 
 
 
-class Game_Pear {
+class Game_Pear1 {
     public String msg ="Guess a number between 1 and 1000. PLAY";
 
    private int min ;
    private int max ;
+   private int range ;
    private int computer_guess;
     public int count ;
 
     // constructor for initial values
 
-    public Game_Pear(){
+    public Game_Pear1(){
         initGAME();
     }
 
@@ -24,9 +25,9 @@ class Game_Pear {
 
     private void initGAME() {
         min = 1;
-        max = 1025;
+        max = 1024;
         count = 1;
-        computer_guess= Computer_Guess(getMin(), getMax());
+        computer_guess = Computer_Guess(getMin(), getMax());
     }
 
     // Setters
@@ -37,6 +38,9 @@ class Game_Pear {
     private void setMin(int b) {
         this.min = b;
     }
+    private void setRange( int high, int low){
+        this.range = high - low;
+    }
 
     // Getters
 
@@ -46,9 +50,15 @@ class Game_Pear {
    private int getMin() {
         return min;
     }
-   private int Computer_Guess(int low, int high) {
-        return low + (high - low) / 2;
+
+    private int getRange(int high,  int low){
+        range = high - low;
+        return range;
     }
+   private int Computer_Guess(int low, int high) {
+
+           return low + (high - low) / 2;
+       }
 
     // Start the game method
 
@@ -57,7 +67,7 @@ class Game_Pear {
         msg = "Good Luck guessing the computer's choice, an integer between 1 and 1000";
         Display();
         min = 1;
-        max = 1025;
+        max = 1001;
         count = 1;
         computer_guess= Computer_Guess(getMin(), getMax());
         Keep_Playing();
@@ -84,7 +94,7 @@ class Game_Pear {
         count++;
         msg = "You chose GREATER than :" + computer_guess;
         Display();
-        setMin(computer_guess);
+        setMin(computer_guess + 1);
         Keep_Playing();
     }
     void choose_equal(){
@@ -104,12 +114,21 @@ class Game_Pear {
 
     private void Keep_Playing() {
 
+        if (getRange(getMax(), getMin()) == 0){
+            msg =  msg = "Game Over    " + computer_guess + "  is your number ";
+            Display();
+            Start_game();
+        }
+        else {
+
         computer_guess = Computer_Guess(getMin(), getMax());
-        msg = "Is your choice LOWER, HIGHER , or EQUAL to the computer's guess  : " + computer_guess + "? "+ count +" questions ";
-        Display();
+        msg = "Is your choice LOWER, GREATER , or EQUAL to the computer's guess  : " + computer_guess + "? "+ count +" questions ";
+            Display();
+
     }
 
 
-}
+
+}}
 
 
