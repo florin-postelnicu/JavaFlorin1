@@ -1,6 +1,4 @@
 
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.Font;
@@ -24,20 +22,32 @@ class GamePearGUI  implements ActionListener {
 
         JLabel label1 = new JLabel();
         label1.setText("COMMUNIQUE");
+
 //        label1.setBounds(10,10,10,10);
 
 
         JButton yes_g = new JButton("PLAY");
+        yes_g.setBackground(Color.GREEN);
+        yes_g.setBorderPainted(true);
 //        yes_g.setBounds(10,10,20,10);
         JButton no_g = new JButton("CLEAR ");
+        no_g.setBackground(Color.cyan);
+        no_g.setBorderPainted(true);
 //        no_g.setBounds(31,10,20,10);
         JButton less_g = new JButton("LOWER");
+        less_g.setBackground(Color.MAGENTA);
 //        less_g.setBounds(52,10,20,10);
         JButton greater_g = new JButton("GREATER");
+        greater_g.setBackground(Color.orange);
 //        greater_g.setBounds(52, 21,20,10);
         JButton equal_g = new JButton("EQUAL");
+        equal_g.setBackground(Color.YELLOW);
 //        equal_g.setBounds(52, 32, 20, 10);
-        JButton quit_g = new JButton("Quit");
+        JButton quit_g = new JButton("QUIT");
+        quit_g.setBackground(Color.PINK);
+        quit_g.setOpaque(true);
+        quit_g.setBorderPainted(true);
+
 //        quit_g.setBounds(10,21,60,10);
 
         JTextArea textArea = new JTextArea(25,60);
@@ -50,6 +60,7 @@ class GamePearGUI  implements ActionListener {
         scroller.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         panel.add(scroller);
         textArea.setFont(new Font("Serif", Font.BOLD,  24));
+        textArea.setForeground(Color.BLUE);
 
 
 
@@ -59,7 +70,7 @@ class GamePearGUI  implements ActionListener {
         frame.add(no_g);
 
         // This is the CLEAR Button
-        
+
         PrintStream standardOut = System.out;
         no_g.addActionListener(evt -> {
             // clears the text area
@@ -89,7 +100,7 @@ class GamePearGUI  implements ActionListener {
         quit_g.addActionListener(event -> System.exit(0));
 
         // The next three lines redirect the console's print to the JTextArea
-        
+
         PrintStream printStream = new PrintStream(new CustomOutputStream(textArea));
         System.setOut(printStream);
         System.setErr(printStream);
@@ -110,7 +121,7 @@ class GamePearGUI  implements ActionListener {
 
 }
 
-class Test4 {
+class PlayTheGame {
     public static void main(String[] args) {
         new GamePearGUI();
 
