@@ -1,24 +1,37 @@
 
 
+
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
 public class HangmanJ3 {
-    boolean repeat_in_ML;
+
+    private String word;
+
+     HangmanJ3(){
+        word = "hangamanGame";
+    }
+    private  void  setWord( String w) {
+       this.word = w;
+    }
+
+    private  String getWord (){
+        return word;}
 
 
-
-    public static void main(String[] args) {
+    public  void  Hange() {
+        HangmanJ3 hang = new HangmanJ3();
 
         Scanner scan = new Scanner(System.in);
-         String str = "hangmanGame";
-         char[] chars = str.toCharArray();
+        String str = hang.getWord();
+        char[] chars = str.toCharArray();
 
 
         // String to characters array
 
 
-        char[] memoryLane = new char[chars.length + 7];
+        char[] memoryLane = new char[chars.length + 8];
         int index_memory = 0;
 
 
@@ -55,24 +68,27 @@ public class HangmanJ3 {
                 System.out.println("This is the word! Congrats!");
                 System.exit(0);
             }
-            if (!bull | toString(guess, memoryLane) ) {
+            if (!bull | Memory_Repeat(guess, memoryLane) ) {
 
                 count++;
                 System.out.println("You made Soooooo many mistakes   :" + count);
                 if(count >= 7){
-                    System.out.println("Bad !  Bad1   Bad!");
-                   System.exit(0);
+                    System.out.println("Bad !  Bad!   Bad!");
+                    System.exit(0);
                 }
             }
             memoryLane[index_memory] = guess;
-            System.out.println(memoryLane);
+            System.out.println("Your memory's bellow !");
+            System.out.println( memoryLane);
             index_memory++;
+            System.out.println("That's the status of your work on the secret word :");
             System.out.println(chars);
         }
     }
 
-    private static boolean toString(char guesst, char[] aRRay) {
-        for(int i = 0; i <= 7; i++ ){
+    private static boolean Memory_Repeat(char guesst, char[] aRRay) {
+        HangmanJ3 hango = new HangmanJ3();
+        for(int i = 0; i <= hango.getWord().length() + 7; i++ ){
             if ( aRRay[i] == guesst ){
                 return true;
 
@@ -83,4 +99,10 @@ public class HangmanJ3 {
         return false;
     }
 }
+class TestHangaman {
+    public static void main(String[] args) {
 
+
+    HangmanJ3 hangman_game = new HangmanJ3();
+    hangman_game.Hange();
+}}
