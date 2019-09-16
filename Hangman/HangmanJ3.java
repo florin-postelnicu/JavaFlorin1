@@ -5,26 +5,29 @@
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
-public class HangmanJ3 {
+ class HangmanJ3 {
 
     private String word;
 
+    Scanner scan = new Scanner(System.in);
+
      HangmanJ3(){
-        word = "hangamanGame";
+         SelectWord neword = new SelectWord();
+        word = neword.getWord() ;
     }
     private  void  setWord( String w) {
        this.word = w;
     }
 
-    private  String getWord (){
+    private  String getWordo (){
         return word;}
 
 
-    public  void  Hange() {
+    public void  Hange() {
         HangmanJ3 hang = new HangmanJ3();
-
-        Scanner scan = new Scanner(System.in);
-        String str = hang.getWord();
+//
+//        Scanner scan = new Scanner(System.in);
+        String str = hang.getWordo();
         char[] chars = str.toCharArray();
 
 
@@ -39,8 +42,6 @@ public class HangmanJ3 {
 
             chars[i] = '*';
         }
-
-
         System.out.println(str);
 
         System.out.println(chars);
@@ -55,6 +56,8 @@ public class HangmanJ3 {
 
             char guess = scan.next().charAt(0);
 
+//            char guess = PlayHG();
+
             for (int i = 0; i <= chars.length - 1; i++) {
 
                 if (guess == str.charAt(i)) {
@@ -65,20 +68,26 @@ public class HangmanJ3 {
             }
 
             if(!Arrays.toString(chars).contains("*")){
-                System.out.println("This is the word! Congrats!");
+                System.out.println("This is the word!" );
+                System.out.println(chars );
+                System.out.println("Congrats!");
                 System.exit(0);
             }
             if (!bull | Memory_Repeat(guess, memoryLane) ) {
 
                 count++;
-                System.out.println("You made Soooooo many mistakes   :" + count);
+
                 if(count >= 7){
                     System.out.println("Bad !  Bad!   Bad!");
                     System.exit(0);
                 }
             }
             memoryLane[index_memory] = guess;
+
+            System.out.println("You made Soooooo many mistakes   :" + count);
+
             System.out.println("Your memory's bellow !");
+
             System.out.println( memoryLane);
             index_memory++;
             System.out.println("That's the status of your work on the secret word :");
@@ -88,21 +97,30 @@ public class HangmanJ3 {
 
     private static boolean Memory_Repeat(char guesst, char[] aRRay) {
         HangmanJ3 hango = new HangmanJ3();
-        for(int i = 0; i <= hango.getWord().length() + 7; i++ ){
+        for(int i = 0; i <= hango.getWordo().length() + 7; i++ ){
             if ( aRRay[i] == guesst ){
                 return true;
-
             }
         }
-
-
         return false;
     }
+
+    public void DisplayHG(){
+        System.out.println("Let's the game began!");
+    }
+    private char PlayHG(){
+        char g =  scan.next().charAt(0);
+
+        return g;
+
+    }
 }
+
 class TestHangaman {
     public static void main(String[] args) {
 
 
     HangmanJ3 hangman_game = new HangmanJ3();
     hangman_game.Hange();
+
 }}
