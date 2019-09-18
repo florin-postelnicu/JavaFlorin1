@@ -1,5 +1,4 @@
-/*
-
+/*hangmanJ4 and SelectWord are the main ingredients for HangmanJ6-the play machine
  */
 import java.util.Arrays;
 import java.util.Scanner;
