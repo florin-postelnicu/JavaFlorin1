@@ -1,25 +1,21 @@
-
+/*
+HangmanJ4 , and SelectWord are the engine for HangmanJ5
+*/
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
 class HangmanJ4 {
 
-
     private String word;
-
     Scanner scan = new Scanner(System.in);
-
+    
     HangmanJ4() {
         SelectWord neword = new SelectWord();
         word = neword.get_a_new_Word();}
 
-
-
-
     private String getWord () {
         return word;
     }
-
 
     void Hange () {
         HangmanJ4 hang = new HangmanJ4();
@@ -28,13 +24,10 @@ class HangmanJ4 {
         String str = hang.getWord();
         char[] chars = str.toCharArray();
 
-
         // String to characters array
-
 
         char[] memoryLane = new char[chars.length + 8];
         int index_memory = 0;
-
 
         for (int i = 0; i <= chars.length - 1; i++) {
 
@@ -53,26 +46,18 @@ class HangmanJ4 {
             System.out.println("Enter a new letter : ");
 
             char guess = scan.next().charAt(0);
-
-//            char guess = PlayHG();
-
             for (int i = 0; i <= chars.length - 1; i++) {
 
                 if (guess == str.charAt(i)) {
                     chars[i] = guess;
                     bull = true;
-
                 }
             }
-
             if (!Arrays.toString(chars).contains("*")) {
                 System.out.println("This is the word!");
                 System.out.println(chars);
                 System.out.println("Congrats!");
                 new HangmanJ5();
-//                HangmanJ5 new_game = new HangmanJ5();
-//                new_game.Invite_play();
-
             }
             if (!bull | Memory_Repeat(guess, memoryLane)) {
 
@@ -82,8 +67,6 @@ class HangmanJ4 {
                     System.out.println("Bad !  Bad!   Bad!");
                     System.out.println(str);
                     new HangmanJ5();
-//                    HangmanJ5 new_game = new HangmanJ5();
-//                    new_game.Invite_play();
                 }
             }
             memoryLane[index_memory] = guess;
@@ -109,18 +92,4 @@ class HangmanJ4 {
         }
         return false;
     }
-
-
-
-
 }
-
-//
-//class TestHangaman4 {
-//    public static void main(String[] args) {
-//
-//        HangmanJ4 hangman_game = new HangmanJ4();
-//        hangman_game.Hange();
-//
-//
-//    }}
