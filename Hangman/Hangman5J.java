@@ -1,4 +1,6 @@
+/*
 
+ */
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
@@ -26,7 +28,6 @@ class HangmanJ5 {
 
 
 }
-
 
 
 class TestH5{
