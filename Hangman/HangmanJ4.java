@@ -57,7 +57,7 @@ class HangmanJ4 {
                 System.out.println("This is the word!");
                 System.out.println(chars);
                 System.out.println("Congrats!");
-                new HangmanJ5();
+                new HangmanJ6();
             }
             if (!bull | Memory_Repeat(guess, memoryLane)) {
 
@@ -66,7 +66,7 @@ class HangmanJ4 {
                 if (count >= 7) {
                     System.out.println("Bad !  Bad!   Bad!");
                     System.out.println(str);
-                    new HangmanJ5();
+                    new HangmanJ6();
                 }
             }
             memoryLane[index_memory] = guess;
