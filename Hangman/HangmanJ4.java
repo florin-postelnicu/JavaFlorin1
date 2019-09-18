@@ -1,124 +1,126 @@
 
-
-
-
 import java.util.Arrays;
 import java.util.Scanner;
 import java.lang.*;
- class HangmanJ4 {
+class HangmanJ4 {
 
 
-     private String word;
+    private String word;
 
-     Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in);
 
-     HangmanJ4() {
-         SelectWord neword = new SelectWord();
-         word = neword.get_a_new_Word();}
-
-
+    HangmanJ4() {
+        SelectWord neword = new SelectWord();
+        word = neword.get_a_new_Word();}
 
 
-         private String getWord () {
-             return word;
-         }
 
 
-          void Hange () {
-             HangmanJ4 hang = new HangmanJ4();
+    private String getWord () {
+        return word;
+    }
+
+
+    void Hange () {
+        HangmanJ4 hang = new HangmanJ4();
 //
 //        Scanner scan = new Scanner(System.in);
-             String str = hang.getWord();
-             char[] chars = str.toCharArray();
+        String str = hang.getWord();
+        char[] chars = str.toCharArray();
 
 
-             // String to characters array
+        // String to characters array
 
 
-             char[] memoryLane = new char[chars.length + 8];
-             int index_memory = 0;
+        char[] memoryLane = new char[chars.length + 8];
+        int index_memory = 0;
 
 
-             for (int i = 0; i <= chars.length - 1; i++) {
+        for (int i = 0; i <= chars.length - 1; i++) {
 
-                 chars[i] = '*';
-             }
+            chars[i] = '*';
+        }
 //             System.out.println(str);
 
-             System.out.println(chars);
-             int count = 0;
+        System.out.println(chars);
+        int count = 0;
 
-             while (true) {
+        while (true) {
 
-                 boolean bull = false;
+            boolean bull = false;
 
-                 // Enter a character
-                 System.out.println("Enter a new letter : ");
+            // Enter a character
+            System.out.println("Enter a new letter : ");
 
-                 char guess = scan.next().charAt(0);
+            char guess = scan.next().charAt(0);
 
 //            char guess = PlayHG();
 
-                 for (int i = 0; i <= chars.length - 1; i++) {
+            for (int i = 0; i <= chars.length - 1; i++) {
 
-                     if (guess == str.charAt(i)) {
-                         chars[i] = guess;
-                         bull = true;
+                if (guess == str.charAt(i)) {
+                    chars[i] = guess;
+                    bull = true;
 
-                     }
-                 }
+                }
+            }
 
-                 if (!Arrays.toString(chars).contains("*")) {
-                     System.out.println("This is the word!");
-                     System.out.println(chars);
-                     System.out.println("Congrats!");
-                     System.exit(0);
+            if (!Arrays.toString(chars).contains("*")) {
+                System.out.println("This is the word!");
+                System.out.println(chars);
+                System.out.println("Congrats!");
+                new HangmanJ5();
+//                HangmanJ5 new_game = new HangmanJ5();
+//                new_game.Invite_play();
 
-                 }
-                 if (!bull | Memory_Repeat(guess, memoryLane)) {
+            }
+            if (!bull | Memory_Repeat(guess, memoryLane)) {
 
-                     count++;
+                count++;
 
-                     if (count >= 7) {
-                         System.out.println("Bad !  Bad!   Bad!");
-                         System.out.println(str);
-                         System.exit(0);
-                     }
-                 }
-                 memoryLane[index_memory] = guess;
-                 index_memory++;
+                if (count >= 7) {
+                    System.out.println("Bad !  Bad!   Bad!");
+                    System.out.println(str);
+                    new HangmanJ5();
+//                    HangmanJ5 new_game = new HangmanJ5();
+//                    new_game.Invite_play();
+                }
+            }
+            memoryLane[index_memory] = guess;
+            index_memory++;
 
-                 System.out.println("You made Soooooo many mistakes   :" + count);
+            System.out.println("You made Soooooo many mistakes   :" + count);
 
-                 System.out.println("Your memory's bellow !");
+            System.out.println("Your memory's bellow !");
 
-                 System.out.println(memoryLane);
+            System.out.println(memoryLane);
 
-                 System.out.println("That's the status of your work on the secret word :");
-                 System.out.println(chars);
-             }
-         }
+            System.out.println("That's the status of your work on the secret word :");
+            System.out.println(chars);
+        }
+    }
 
-         private static boolean Memory_Repeat ( char guesst, char[] aRRay){
-             HangmanJ4 hango = new HangmanJ4();
-             for (int i = 0; i <= aRRay.length -1; i++) {
-                 if (aRRay[i] == guesst) {
-                     return true;
-                 }
-             }
-             return false;
-         }
-
-
-
-
-     }
+    private static boolean Memory_Repeat ( char guesst, char[] aRRay){
+        HangmanJ4 hango = new HangmanJ4();
+        for (int i = 0; i <= aRRay.length -1; i++) {
+            if (aRRay[i] == guesst) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
-class TestHangaman4 {
-    public static void main(String[] args) {
 
-    HangmanJ4 hangman_game = new HangmanJ4();
-    hangman_game.Hange();
 
-}}
+}
+
+//
+//class TestHangaman4 {
+//    public static void main(String[] args) {
+//
+//        HangmanJ4 hangman_game = new HangmanJ4();
+//        hangman_game.Hange();
+//
+//
+//    }}
