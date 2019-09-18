@@ -15,6 +15,7 @@ class HangmanJ6 {
     }
     public HangmanJ6() {
         if(Invite_play()!='y'){
+            System.out.println("Thank you for playing HangmanJ  !")
             System.exit(0);
 
         }
