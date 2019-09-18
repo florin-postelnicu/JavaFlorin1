@@ -17,22 +17,16 @@ class HangmanJ6 {
         if(Invite_play()!='y'){
             System.out.println("Thank you for playing HangmanJ  !")
             System.exit(0);
-
         }
         else{
             HangmanJ4 hangman_game = new HangmanJ4();
             hangman_game.Hange();
-
         }
     }
-
-
 }
 
-
-class TestH5{
+class PlayDaGame{
     public static void main(String[] args) {
-        HangmanJ6 play = new HangmanJ6();
-
+        new HangmanJ6();
     }}
 
