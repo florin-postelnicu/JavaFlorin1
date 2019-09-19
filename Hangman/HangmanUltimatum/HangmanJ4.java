@@ -1,6 +1,6 @@
 
 /*
-HangmanJ4 , and SelectWord are the engine for HangmanJ6- the play machine
+HangmanJ4 ,ConvertArrayList, listofwords.csv and SelectWord are the engine for HangmanJ6- the play machine
 */
 import java.util.Arrays;
 import java.util.Scanner;
