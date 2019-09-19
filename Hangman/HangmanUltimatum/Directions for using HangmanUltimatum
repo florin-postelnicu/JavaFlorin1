@@ -1,4 +1,9 @@
-Stuff
+Here is the doc for using vectors(or ArrayList)
+
+https://www.javatpoint.com/java-vector
+
+
+
 The way the things are wprking here:
 
 HangmanJ6 is the Commnd Center. This is the one withs a psvm function , 
