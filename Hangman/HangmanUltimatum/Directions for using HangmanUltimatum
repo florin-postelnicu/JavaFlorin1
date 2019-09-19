@@ -1,0 +1,17 @@
+Stuff
+The way the things are wprking here:
+
+HangmanJ6 is the Commnd Center. This is the one withs a psvm function , 
+that should be run.
+
+HangmanJ4  is the main engine of the game. In this class it is solved the algorithm for hangman.
+
+SelectWord class  gets a random word from a CSV file listofwords.csv,
+but, it doesn't call directly the text file, it calss a new class:
+
+ConvertArrayList. This class reads a file csv, and converts thelist of words into an ArrayList.
+ArrayList is used because of the dynamic aloccation of the memory.
+
+The text file listofwords.scv needs to be refferd through its path. Easier is to just 
+copy the path of the file in the call :
+scanner = new Scanner(new File("C:\\Users\\postelnicu\\IdeaProjects\\FlorinJavaProject\\src\\JavaFlorin01\\src\\listofwordsj.csv"));
