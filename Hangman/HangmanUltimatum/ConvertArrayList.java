@@ -9,8 +9,6 @@ public class ConvertArrayList {
 
     ArrayList<String> stringArrayList = new ArrayList<>();
     private static final String COMMA_DELIMITER = ",";
-    int count = 0;
-    int limit;
 
     public  void creatArray()
 
