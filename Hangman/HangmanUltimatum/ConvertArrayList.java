@@ -15,9 +15,6 @@ public class ConvertArrayList {
     public  void creatArray()
 
     {
-//        String[] ReadcsvArray = new String[10000];
-
-
 
         Scanner scanner = null;
         try {
@@ -28,15 +25,7 @@ public class ConvertArrayList {
             while(scanner.hasNext())
             {
 
-
-//                System.out.print(scanner.next()+"   ");
                 stringArrayList.add(scanner.next().strip());
-//                ReadcsvArray[count] = scanner.next().strip();
-//                System.out.println(ReadcsvArray[count]);
-
-//                System.out.println(stringArrayList.get(count) + " of index : " + count);
-//                count++;
-
             }
         }
         catch (FileNotFoundException fe)
@@ -50,13 +39,3 @@ public class ConvertArrayList {
         }
     }
 }
-
-
-//class TestConvertArrayList {
-//    public static void main(String[] args) {
-//        ConvertArrayList cov = new ConvertArrayList();
-//
-//        System.out.println(cov.stringArrayList.size() + "     " + cov.count);
-//
-//    }
-
