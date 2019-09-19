@@ -130,29 +130,53 @@ public class SelectWord {
             "waste,watch,water,wealth,weapon,weather,weigh,welcome,wheat,wheel," +
             "where,whether,which,while,white,whole,willing,window,winter,withdraw," +
             "without,witness,woman,wonder,wonderful,world,worry,worse,worth,wound," +
-            "wreck,wreckage,write,wrong,yellow,yesterday,young";
+            "wreck,wreckage,write,wrong,yellow,yesterday,young"
+
+    ;
 
 
-    String[] Aray_of_strings = stringj.split(",");
 
 
-    int limit = Aray_of_strings.length;
+//    String[] Aray_of_strings = stringj.split(",");
+    ConvertArrayList cov =new  ConvertArrayList();
+
+
+
+
+
+
+
 
     public String get_a_new_Word(){
+        cov.creatArray();
+        int limit = cov.stringArrayList.size();
         int max = limit;
         int min = 0;
-        int range = max - min + 1;
-        int index = (int)(Math.random()* range );
+        int range = max - min + 1 ;
+        int index = (int)(Math.random()* range + min);
 
-        return Aray_of_strings[index];
+//        String.valueOf(convert.stringArrayList.size());
+
+
+
+        return  cov.stringArrayList.get(index);
+
+
+
+
+
+
+
 
     }
+
+
 }
-//
-//class TesTSelectWord {
-//    public static void main(String[] args) {
-//        SelectWord neword = new SelectWord();
-//        System.out.println(neword.get_a_new_Word());
+
+class TesTSelectWord {
+    public static void main(String[] args) {
+        SelectWord neword = new SelectWord();
+        System.out.println(neword.get_a_new_Word());
 //        System.out.println(neword.stringj.length());
-//    }
-//}
+    }
+}
