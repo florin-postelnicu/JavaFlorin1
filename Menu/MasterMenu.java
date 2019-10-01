@@ -4,12 +4,13 @@ import java.util.Scanner;
 public class MasterMenu {
     public static void main(String[] args) {
         MasterMenu.display_things();
+        boolean keepatit = true;
 
 
-        while (true) {
+        while (keepatit) {
 
             Scanner scan = new Scanner(System.in);
-            boolean keepatit = true;
+
             int decision = scan.nextInt();
             switch (decision) {
                 case 1:
