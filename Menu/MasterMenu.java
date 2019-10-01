@@ -14,13 +14,9 @@ public class MasterMenu {
             switch (decision) {
                 case 1:
                     WeaponMenu wm = new WeaponMenu();
-                    System.out.println("Weapons available :");
-                    System.out.println(" 1  Spade");
-                    System.out.println(" 2  Ax");
-                    System.out.println(" Stones");
-                    System.out.println("Your weapon_of_choice Is:");
+                    wm.display_weapons();
                     wm.weaponMenu();
-                    System.out.println("Thank you ");
+                    System.out.println("The Weapon :" +wm.getWeapon());
                     MasterMenu.display_things();
 
                     break;
