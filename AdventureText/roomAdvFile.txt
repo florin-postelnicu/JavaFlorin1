@@ -1,0 +1,64 @@
+1
+
+Dragon Dungeon
+
+If you entered this room , most likely
+you are not going to get out!
+Yeah, you can look through the keyhole ;
+Darkness, that's what you see! ( And the tail of a pig-tailed Macaque ,as well!)
+Through the window to your left you see a cauldron with
+boiling oil. It stinks!
+You , and your friends can easily fit in.
+Through the window above your had you can see the sky!
+Can you fly?
+However, if you have some goods with you,
+here are some options:
+
+$100           SOUTH S or s   12
+Chocolate Bar  NORTH N or n   2
+Coca- Cola     EAST  E or e   5
+Good Grades    DOWN  D or d   11
+Rich Parents   UP    U or u   3
+
+Objects :
+Trebuchet
+Sling
+Many Goats
+Lightener
+Radio
+Keys
+Wig
+
+-----
+
+2
+
+Mirror Room
+
+Welcome to the nightmare's room.
+Here you really have great chances to stay for ever.
+No windows bro! No keyholes either!
+Some of the creatures you are seeing are really feeling for you!
+They love travelers in distress!
+Show a little sign of confusion and you will roth right here.
+If you want out, here is what you can do:
+
+Trebuchet     SOUTH S or s 3
+Sling         NORTH N or n 4
+Good Nature   EAST  E or e 1
+Live Goat     WEST  W or w 15
+
+
+Objects:
+Spoon
+Spinner
+Ball
+Rice
+Rat Poison
+Crayon
+
+-----
+
+
+
+
