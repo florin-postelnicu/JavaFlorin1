@@ -21,9 +21,6 @@ public class FindZPrimes {
                 array1.add(i);
             }
         }
-        System.out.println(array1.size());
-        System.out.println(array1.get(3));
-
         int k = 0;
         for (Integer integer : array1) {
             k = k + 1;
