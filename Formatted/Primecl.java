@@ -10,16 +10,6 @@ public class Primecl {
         for (int i = 2; i < up; i++) {
             if (n % i == 0) {
                 detect = 1;
-
             }
-
         }
         return detect;
-    }}
-
-// t{
-//    public static void main(String[] args) {
-//        Primecl primecl = new Primecl();
-//        System.out.println(primecl.checkprime(7));
-//    }
-//}
