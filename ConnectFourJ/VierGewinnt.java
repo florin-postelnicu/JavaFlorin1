@@ -1,6 +1,9 @@
+
 /* ************************************************************************* *\
 *                Programmierung 1 HS 2019 - Serie 5-1                         *
 \* ************************************************************************* */
+
+
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -14,7 +17,7 @@ public class VierGewinnt
     boolean done ;
 
     private Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
-    private IPlayer[] players = new IPlayer[ 2 ]; // two players
+    private IPlayer[] players = new IPlayer[ 2 ]; // two players
 
     /** initialize board and players and start the game */
     public void play()
@@ -42,7 +45,7 @@ public class VierGewinnt
 
         /* play... */
         boolean solved = false;
-        int currentPlayer = ( new java.util.Random() ).nextInt( 2 );  //choose randomly who begins
+        int currentPlayer = new java.util.Random().nextInt( 2 );  //choose randomly who begins
         System.out.println( "current player: " + currentPlayer );
         int insertCol, insertRow; // starting from 0
         while ( !solved && !this.isBoardFull() ) {
@@ -52,7 +55,7 @@ public class VierGewinnt
             insertCol = players[ currentPlayer ].getNextColumn( getCopyOfBoard() );
             // insert the token and get the row where it landed
             insertRow = this.insertToken( insertCol, players[ currentPlayer ].getToken() );
-            // check if the game is over
+            // check if the game is over
             solved = this.checkVierGewinnt( insertCol, insertRow );
             //switch to other player
             if ( !solved )
@@ -78,7 +81,6 @@ public class VierGewinnt
         for (int row = 0; row <board[0].length ; row++) {
             if (board[column][row] == Token.empty ) {
                 board[column][row] = tok;
-                System.out.println("Row = " + row + " Column = "+ column);
                 retrow = row;
                 break;
             }
@@ -110,28 +112,88 @@ public class VierGewinnt
     {
         //TODO: Your code goes here
 
-        //  Check to the right of the given field
-        if(row +3<6 && board[col][row] ==board[col][row +1] &&
-        board[col][row+1]==board[col][row+2] && board[col][row+2]==board[col][row +3] )
-            return true;
-        // Check to the Lest
-        else if ( row -3 >=0 && board[col][row] ==board[col][row -1] &&
-                board[col][row-1]==board[col][row-2] && board[col][row-2]==board[col][row -3])
-            return true;
-        // Check above
-        else if (col +3 < 7 &&
-                board[col][row] ==board[col +1][row] &&
-            board[col +1 ][row]==board[col+2][row] && board[col+2][row]==board[col+3][row])
-                return true;
-        //Check bellow
-        else if(col -3>= 0 &&
-                 board[col][row] ==board[col-1][row ] &&
-            board[col-1][row]==board[col-2][row] && board[col-2][row]==board[col-3][row])
+        //  Check horizontal
+        int winsHorizontal = 0;
+        for (int i=0; i<4; i++)
+            if (board[i][row] != Token.empty && board[i][row] ==board[i +1][row] &&
+                    board[i +1 ][row]==board[i+2][row] && board[i+2][row]==board[i+3][row])
+                winsHorizontal++;
+
+        if (winsHorizontal != 0)
             return true;
 
+            //check down
+        else if ( (row -3)>=0 && board[col][row] ==board[col][row -1] &&
+                board[col][row-1]==board[col][row-2] && board[col][row-2]==board[col][row -3]){
 
+            return true;
+        }
 
-        return false; //TODO: Replace this line!
+        // Check front slash
+
+        //first position
+        else if( (col+3)<7 && (row+3)<6 &&
+                board[col][row]==board[col+1][row +1] &&
+                board[col+1][row +1]==board[col+2][row+2] && board[col+2][row+2]==board[col+3][row+3]){
+
+            return true;
+        }
+        //second position
+        else if( (col+2)<7 && (row+2)<6 && (col-1)>=0 && (row-1)>=0 &&
+                board[col][row]==board[col+1][row +1] &&
+                board[col+1][row +1]==board[col+2][row+2] && board[col+2][row+2]==board[col-1][row-1]){
+
+            return true;
+        }
+        //third position
+        else if( (col+1)<7 && (row+1)<6 && (col-2)>=0 && (row-2)>=0 &&
+                board[col][row]==board[col+1][row +1] &&
+                board[col+1][row +1]==board[col-1][row-1] && board[col-1][row-1]==board[col-2][row-2]){
+
+            return true;
+        }
+
+        //fourth position
+        else if((col-3)>=0 && (row-3)>=0 &&
+                board[col][row] ==board[col-1][row-1 ] &&
+                board[col-1][row-1]==board[col-2][row-2] && board[col-2][row-2]==board[col-3][row-3]){
+
+            return true;
+        }
+
+        // check back slash
+
+        //back pos 1
+        else if ((col+3)<7 && (row-3) >=0 &&
+                board[col][row]==board[col+1][row-1] &&
+                board[col+1][row-1]==board[col+2][row-2] && board[col+2][row-2]==board[col+3][row-3]){
+
+            return true;
+        }
+        // back pos 2
+        else if ((col+2)<7 && (row-2)>=0 && (col-1)>=0 && (row+1)<6 &&
+                board[col][row]==board[col+1][row-1] &&
+                board[col+1][row-1]==board[col+2][row-2] && board[col+2][row-2]==board[col-1][row+1]){
+
+            return true;
+        }
+        // back pos 3
+        else if ((col+1)<7 && (row-1)>=0 && (col-2)>=0 && (row+2)<6 &&
+                board[col][row]==board[col+1][row-1] &&
+                board[col+1][row-1]==board[col-1][row+1] && board[col-1][row+1]==board[col-2][row+2]){
+
+            return true;
+        }
+        // back pos 4
+        else if((col-3)>=0 && (row+3)<6 &&
+                board[col][row] ==board[col-1][row +1] &&
+                board[col-1][row+1]==board[col-2][row+2] && board[col-2][row+2]==board[col-3][row +3]){
+
+            return true;
+        }
+
+        else
+            return false; //TODO: Replace this line!}
     }
 
 
