@@ -5,6 +5,7 @@ public class Cars {
     public String model;
     public String color;
 
+
     public Cars(String theBrand, String theModel, String theColor){
         this.brand = theBrand;
         this.model = theModel;
@@ -17,9 +18,9 @@ public class Cars {
     }
 
     public Cars(){
-        this.brand = "Rabla";
+        this.brand = "Lemon";
         this.model = "Stegosaur";
-        this.color = "TotalGreen";
+        this.color = "Greenish";
 
 
     }
@@ -40,6 +41,10 @@ public class Cars {
     }
     public String getColor(){
         return this.color;
+    }
+
+    public void printCarCahracters(){
+        System.out.println("Brand  : "+ this .getBrand() +"\nModel :  " + this.getModel() +"\nColor :  " + this.getColor());
     }
 
 }
