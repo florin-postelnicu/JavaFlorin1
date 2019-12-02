@@ -1,4 +1,5 @@
 
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.Scanner;
 public class Cars {
     public String  brand;
@@ -7,6 +8,7 @@ public class Cars {
     public double gas = 0;
     public double currency = 25;
     public double bankacount;
+    public boolean running = false;
 
 //    public double mon;
 
@@ -94,8 +96,28 @@ public class Cars {
                 this.currency = this.currency - moneyB*1.1;
                 System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
                 return this.currency;
+
             }
+
         }
+        this.running = true;
         return this.gas;
+    }
+    public double GasConsumption() {
+        while( running){
+
+            try{
+               long  Old_time = System.currentTimeMillis();
+               long New_time = System.currentTimeMillis();
+               if(New_time - Old_time > 0.5){
+                   Thread.sleep(5*60*10);
+                   this.gas = this.getGas() - 0.5;
+                   Old_time = New_time;
+                   System.out.println("The car's consumption is  : " + this.gas);
+               }
+            }catch(Exception e){
+                System.out.println("Got an exception! \n");
+            }
+        }return this.gas;
     }
 }
