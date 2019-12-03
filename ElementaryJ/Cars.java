@@ -98,7 +98,7 @@ public class Cars {
                 System.out.println("Old currency :"+ this.getCurrency());
 
                 this.currency = this.currency + moneyB;
-                this.filltank(money);
+                this.filltank(moneyB);
                 this.currency = this.currency - moneyB*1.1;
                 System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
                 return this.currency;
