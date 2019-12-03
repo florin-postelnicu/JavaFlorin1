@@ -60,11 +60,6 @@ public class Cars {
         System.out.println("Brand  : "+ this .getBrand() +"\nModel :  " + this.getModel() +"\nColor :  " + this.getColor());
     }
     public void filltank( double mon){
-//        if(this.currency<= 0){
-//            this.currency = -Math.abs(this.currency) - mon;}
-//        else{
-//            this.currency = Math.abs(this.currency) - mon;
-//        }
         this.currency = this.currency -mon;
         this.gas = mon*(1/3.05);
         System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
@@ -119,11 +114,11 @@ public class Cars {
 
                 long New_time = System.currentTimeMillis();
                 if(New_time - Old_time > 2500){
-//                    Thread.sleep(5*60*10);
+
                     this.gas = this.getGas() - 0.5;
                     Old_time = New_time;
                     if(this.gas<= 0){
-//                        this.StopZcar();
+
                         this.runtheCar();
                     }
                     System.out.println("The car's consumption is  : " + this.gas);
