@@ -1,5 +1,6 @@
 
-import java.security.spec.RSAOtherPrimeInfo;
+
+
 import java.util.Scanner;
 public class Cars {
     public String  brand;
@@ -8,7 +9,9 @@ public class Cars {
     public double gas = 0;
     public double currency = 25;
     public double bankacount;
-    public boolean running = false;
+    public boolean running = true;
+
+    long  Old_time = System.currentTimeMillis();
 
 //    public double mon;
 
@@ -62,7 +65,7 @@ public class Cars {
         else{
             this.currency = Math.abs(this.currency) - mon;
         }
-       this.gas = mon*(1/3.05);
+        this.gas = mon*(1/3.05);
         System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
 
     }
@@ -78,13 +81,16 @@ public class Cars {
         return currency;
     }
     public double runtheCar(){
-        if(this.gas == 0){
+        if(this.gas <= 0){
             System.out.println("You have an empty tank! \nHow much money are you filling off?\n");
             Scanner scan = new Scanner(System.in);
             double money = scan.nextDouble();
-            if(this.currency - money >= 0){
-            this.filltank(money);
-            return this.gas;}
+            if(money <= 0){
+                this.StopZcar();
+            }
+            else {if(this.currency - money >= 0){
+                this.filltank(money);
+                return this.gas;}
             else{
                 System.out.println("Sorry you do not have that much money!You have only :" +this.getCurrency());
                 System.out.println("Would you like to borrow something? The interest is 10% ?");
@@ -100,24 +106,34 @@ public class Cars {
             }
 
         }
-        this.running = true;
+
+        }
+
         return this.gas;
     }
     public double GasConsumption() {
         while( running){
 
             try{
-               long  Old_time = System.currentTimeMillis();
-               long New_time = System.currentTimeMillis();
-               if(New_time - Old_time > 0.5){
-                   Thread.sleep(5*60*10);
-                   this.gas = this.getGas() - 0.5;
-                   Old_time = New_time;
-                   System.out.println("The car's consumption is  : " + this.gas);
-               }
+
+                long New_time = System.currentTimeMillis();
+                if(New_time - Old_time > 5000){
+//                    Thread.sleep(5*60*10);
+                    this.gas = this.getGas() - 0.5;
+                    Old_time = New_time;
+                    if(this.gas<= 0){
+//                        this.StopZcar();
+                        this.runtheCar();
+                    }
+                    System.out.println("The car's consumption is  : " + this.gas);
+                }
             }catch(Exception e){
                 System.out.println("Got an exception! \n");
             }
         }return this.gas;
     }
-}
+
+    private void StopZcar() {
+        running = false;
+    }}
+
