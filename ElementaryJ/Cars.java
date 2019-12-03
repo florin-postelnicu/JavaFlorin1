@@ -61,7 +61,7 @@ public class Cars {
     }
     public void filltank( double mon){
         if(this.currency<= 0){
-            this.currency = -(Math.abs(this.currency) - mon);}
+            this.currency = -Math.abs(this.currency) - mon;}
         else{
             this.currency = Math.abs(this.currency) - mon;
         }
@@ -117,7 +117,7 @@ public class Cars {
             try{
 
                 long New_time = System.currentTimeMillis();
-                if(New_time - Old_time > 5000){
+                if(New_time - Old_time > 2500){
 //                    Thread.sleep(5*60*10);
                     this.gas = this.getGas() - 0.5;
                     Old_time = New_time;
