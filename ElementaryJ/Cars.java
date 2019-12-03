@@ -60,11 +60,12 @@ public class Cars {
         System.out.println("Brand  : "+ this .getBrand() +"\nModel :  " + this.getModel() +"\nColor :  " + this.getColor());
     }
     public void filltank( double mon){
-        if(this.currency<= 0){
-            this.currency = -Math.abs(this.currency) - mon;}
-        else{
-            this.currency = Math.abs(this.currency) - mon;
-        }
+//        if(this.currency<= 0){
+//            this.currency = -Math.abs(this.currency) - mon;}
+//        else{
+//            this.currency = Math.abs(this.currency) - mon;
+//        }
+        this.currency = this.currency -mon;
         this.gas = mon*(1/3.05);
         System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
 
