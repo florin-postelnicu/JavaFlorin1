@@ -14,10 +14,9 @@ public class TestforCars {
             int speed = 400*((int)(5*Math.random()+ 1 ));
             car.speed = speed;
             car.gas = 5;
+            car.Distance();
 
             car.thread.start();
-
-
 
         }
 }
