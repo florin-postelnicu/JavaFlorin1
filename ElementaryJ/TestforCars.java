@@ -12,8 +12,9 @@ public class TestforCars {
         }
         for(Cars car : CarsList){
             int speed = 400*((int)(5*Math.random()+ 1 ));
+            int gas = ((int)(6*Math.random() + 1));
             car.speed = speed;
-            car.gas = 5;
+            car.gas = gas;
             car.Distance();
 
             car.thread.start();
