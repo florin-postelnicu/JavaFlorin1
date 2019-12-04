@@ -107,7 +107,6 @@ public class Cars implements Runnable{
                 System.out.println("Would you like to borrow something? The interest is 10% ?");
                 double moneyB = scan.nextDouble();
                 System.out.println("Old currency :"+ this.getCurrency());
-
                 this.currency = this.currency + moneyB;
                 this.filltank(moneyB);
                 this.currency = this.currency - moneyB*1.1;
@@ -120,21 +119,18 @@ public class Cars implements Runnable{
         return this.gas;
     }
 
-
     public double GasConsumption(int speed) {
         while( running){
             try{
                 long New_time = System.currentTimeMillis();
                 if(New_time - Old_time > speed){
-
                     this.gas = this.getGas() - 0.5;
                     Old_time = New_time;
                     if(this.gas<= 0){
-
 //                        this.runtheCar();
                         this.StopZcar();
                     }
-                    System.out.println("The "+ this.name+ " consumption is  : " + this.gas + " Speed :"+ speed);
+                    System.out.println("The "+ this.name+ " gas is  : " + this.gas + " Speed :"+ speed);
                 }
             }catch(Exception e){
                 System.out.println("Got an exception! \n");
@@ -155,5 +151,8 @@ public class Cars implements Runnable{
     }
     private void doDBProcessing() throws InterruptedException{
        this.thread.sleep(this.speed);
+    }
+    public void Distance(){
+        System.out.println(this.name +" runs for "+ this.gas*this.speed + "   miles");
     }
 }
