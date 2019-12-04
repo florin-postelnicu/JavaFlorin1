@@ -153,6 +153,6 @@ public class Cars implements Runnable{
        this.thread.sleep(this.speed);
     }
     public void Distance(){
-        System.out.println(this.name +" runs for "+ this.gas*this.speed + "   miles");
+        System.out.println(this.name +" runs for: "+ this.gas*this.speed + "   miles,with a speed of  :"+ this.speed );
     }
 }
