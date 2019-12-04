@@ -1,42 +1,57 @@
 
 
 
+
 import java.util.Scanner;
-public class Cars {
+public class Cars implements Runnable{
+    public String name;
     public String  brand;
     public String model;
     public String color;
-    public double gas = 0;
+    public double gas = 100;
     public double currency = 25;
     public double bankacount;
     public boolean running = true;
+    public int speed = 0;
+    public Thread thread = new Thread(this::run);
+
 
     long  Old_time = System.currentTimeMillis();
 
-//    public double mon;
 
-
-    public Cars(String theBrand, String theModel, String theColor){
+    public Cars(String theBrand, String theModel, String theColor, String theName){
         this.brand = theBrand;
         this.model = theModel;
         this.color = theColor;
+        this.name = theName;
         this.gas =0;
     }
-    public Cars(String theBrand, String theModel){
+    public Cars(String theBrand, String theModel, String theName){
         this.brand = theBrand;
         this.model = theModel;
+        this.name = theName;
         this.color = "I Don't Care";
+
     }
 
-    public Cars(){
+    public Cars(String theName){
+        this.name = theName;
         this.brand = "Lemon";
         this.model = "Stegosaur";
         this.color = "Greenish";
-        this.gas = 0;
-
-
+        this.gas = 10;
 
     }
+
+    public Cars() {
+        this.name = "Lola";
+        this.brand = "Normie";
+        this.model = "RunOver";
+        this.color = "Hazy";
+        this.gas = 0;
+
+    }
+
     public void setBrand(String newBrand){
         this.brand = newBrand;
     }
@@ -62,8 +77,8 @@ public class Cars {
     public void filltank( double mon){
         this.currency = this.currency -mon;
         this.gas = mon*(1/3.05);
-        System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
-
+        System.out.println("Your currency is : " + this.getCurrency() +
+                " and you have "+ this.getGas() +" gallons of gas");
     }
     public double getGas(){
         return  this.gas;
@@ -96,32 +111,30 @@ public class Cars {
                 this.currency = this.currency + moneyB;
                 this.filltank(moneyB);
                 this.currency = this.currency - moneyB*1.1;
-                System.out.println("Your currency is : " + this.getCurrency() + " and you have "+ this.getGas() +" gallons of gas");
+                System.out.println("Your currency is : " + this.getCurrency() + " and you have "+
+                        this.getGas() +" gallons of gas");
                 return this.currency;
-
             }
-
+            }
         }
-
-        }
-
         return this.gas;
     }
-    public double GasConsumption() {
+
+
+    public double GasConsumption(int speed) {
         while( running){
-
             try{
-
                 long New_time = System.currentTimeMillis();
-                if(New_time - Old_time > 2500){
+                if(New_time - Old_time > speed){
 
                     this.gas = this.getGas() - 0.5;
                     Old_time = New_time;
                     if(this.gas<= 0){
 
-                        this.runtheCar();
+//                        this.runtheCar();
+                        this.StopZcar();
                     }
-                    System.out.println("The car's consumption is  : " + this.gas);
+                    System.out.println("The "+ this.name+ " consumption is  : " + this.gas + " Speed :"+ speed);
                 }
             }catch(Exception e){
                 System.out.println("Got an exception! \n");
@@ -131,5 +144,16 @@ public class Cars {
 
     private void StopZcar() {
         running = false;
-    }}
-
+    }
+    public void run(){
+        try{
+        doDBProcessing();
+        this.GasConsumption(this.speed);
+        }catch(InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+    private void doDBProcessing() throws InterruptedException{
+       this.thread.sleep(this.speed);
+    }
+}
