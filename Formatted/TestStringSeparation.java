@@ -10,9 +10,9 @@ public class TestStringSeparation {
 
 
             ConvertNumberIntoCharArray cvna = new ConvertNumberIntoCharArray();
-            char[] newList = cvna.ZArrayList(i);
+            int Santa = cvna.ZPalindrome(i);
 
-            if (cvna.CheckPoly(newList) == 0) {
+            if (Santa == 0) {
                     k = k+1;
                     if(k%10 == 0){
                         System.out.println("\n");
