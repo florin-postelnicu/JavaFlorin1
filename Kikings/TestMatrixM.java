@@ -60,25 +60,24 @@ import java.util.*;
      // New Updates for o whole vector
 
          public static int[][]UpdateMatrixVec(int [][] Matrix, List<int[]> vec){
-        int MatrixV [][] = new int[6][7];
 
         for( int index = 0; index<  vec.size(); index ++){
             for(int row = 0; row <6; row++){
                 for(int col = 0; col <7; col++){
                     if(row != vec.get(index)[0] || col != vec.get(index)[1]){
-                        MatrixV[row][col] = Matrix[row][col] ;
+                        Matrix[row][col] = Matrix[row][col] ;
 
                     }else{
                         System.out.println(vec.get(index)[0]  + "    "+ vec.get(index)[1]);
                         System.out.println("Yep");
-                        MatrixV[row][col] = Matrix[row][col] +1;
-                        System.out.println("Matrix Entry   " + MatrixV[row][col]);
+                        Matrix[row][col] = Matrix[row][col] +1;
+                        System.out.println("Matrix Entry   " + Matrix[row][col]);
                     }
                     }
                 }
             }
 
-        return MatrixV;
+        return Matrix;
      }
      public  static int[] Viky1(int[][] Matrix,int rov,int clov) {
          int[] ar = new int[3];
