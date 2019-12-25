@@ -1,8 +1,5 @@
 
 
-import sun.rmi.runtime.NewThreadAction;
-
-import java.io.PrintStream;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,14 +18,13 @@ import java.util.*;
 
     //Read to the Matrix
 
-    // I am creating a Temp matrix
+    // I am creating a Temp matrix- here the data is read from a text file
+    // and will be the starting matrix
 
      public static  int[][] MatrixM() throws Exception{
          int[][] myArray;
          FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix.txt");
          Scanner sc = new Scanner(new BufferedReader(fr));
-
-
                  int rows = 6;
                  int columns = 7;
                  myArray = new int[rows][columns];
@@ -44,9 +40,11 @@ import java.util.*;
                      }
                  }
 
-//             System.out.println(Arrays.deepToString(myArray));
              return myArray;
      }
+  // At the end of the game, the updated matrix would be
+  // written to the text file, rplacing the old one.
+  // This will rpresent the memory for palyer0 ( or playerX) to get to the new game
 
      public void Write2DMatrix(int[][] matrixes) throws Exception{
          BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/home/florin/IdeaProjects/Viking/src/matrix.txt")));
@@ -65,29 +63,15 @@ import java.util.*;
      }
 
 
-
-
-
-
-     public static int[][] UpdateMatrix(int[][] Matrix,int r, int c, int val){
-         int updatedMatrix [][]= new int[6][7];
-
-         for(int row = 0; row <6; row++){
-             for(int col = 0; col <7; col++){
-                 if(row ==r && col == c){
-                     updatedMatrix[row][col]= val;
-
-                 }
-                 else{
-                     updatedMatrix[row][col]= Matrix[row][col];
-                 }
-             }
-         }
-         return updatedMatrix;
-     }
-
+  // This is the Vector path for player. In the real game sould be two 
+  // vector paths, for exh player. At the end of the game the winner  will
+  //contribute to the update of the corresponding memory(either Memory_Player), or Memory_PlayerX)
+  
+  
      public static List<int[]> Vectors2D (){
          List<int[]> path = new ArrayList<>();
+      //In the game the path will be created using MaxOlista1 
+      // path.add(new int[]{MaxOlista11[1],MaxOlista1[2])
 
              path.add(new int[]{0,0});
              path.add(new int[]{0,1});
@@ -100,6 +84,8 @@ import java.util.*;
 
 
      // New Updates for o whole vector
+     // Here it is done the update of the corresponding memory based
+     // on the winning path
 
          public static int[][]UpdateMatrixVec(int [][] Matrix, List<int[]> vec){
 
@@ -126,6 +112,10 @@ import java.util.*;
          ar[2] = clov;
          return ar;
      }
+  
+  // This is getting the Max value of a subset of The  Memory_Player0
+  //( or Memory_playeX) entries, representing the search for
+  // the best move!
      public static int[] MaxOlista1(List<int[]> vec){
          int max = 0;
          int row =0;
@@ -148,10 +138,13 @@ import java.util.*;
          return array;
      }
 
-     public static int SetEntry1(int[][]Matrix,int c, int r, int val){
-         Matrix[c][r] = val;
-         return val;
-     }
+    /*
+    It should be created
+    
+    public static List<int []> ChoicesAtaTime(int [][]Memory_Player matrix){
+    return List_of_Choices vector for MaxOList1;}
+    */
+    
 
 
 }
