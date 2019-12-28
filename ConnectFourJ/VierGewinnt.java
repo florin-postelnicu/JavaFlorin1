@@ -1,11 +1,9 @@
 
-/* ************************************************************************* *\
-*                Programmierung 1 HS 2019 - Serie 5-1                         *
-\* ************************************************************************* */
 
 
-
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -16,7 +14,7 @@ public class VierGewinnt
     public static final int ROWS = 6;
     boolean done ;
 
-    private Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
+    private static Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
     private IPlayer[] players = new IPlayer[ 2 ]; // two players
 
     /** initialize board and players and start the game */
@@ -52,7 +50,7 @@ public class VierGewinnt
             // get player's next "move"
             // note that we pass only a copy of the board as an argument,
             // otherwise the player would be able to manipulate the board and cheat!
-            insertCol = players[ currentPlayer ].getNextColumn( getCopyOfBoard() );
+            insertCol = (int) players[ currentPlayer ].getNextColumn( getCopyOfBoard() );
             // insert the token and get the row where it landed
             insertRow = this.insertToken( insertCol, players[ currentPlayer ].getToken() );
             // check if the game is over
@@ -61,7 +59,7 @@ public class VierGewinnt
             if ( !solved )
                 currentPlayer = ( currentPlayer + 1 ) % 2;
         }
-        System.out.println( displayBoard( this.board ) );
+        System.out.println( displayBoard( board ) );
         if ( solved )
             System.out.println( "Player " + players[ currentPlayer ].getToken() + " wins!" );
         else
@@ -85,6 +83,8 @@ public class VierGewinnt
                 break;
             }
         }
+//        ComputerPlayer cp = new ComputerPlayer();
+//        cp.DisplayeddieChoices(cp.EddieChoices(board));
         return  retrow; //TODO: Replace this line
     }
 
@@ -198,13 +198,11 @@ public class VierGewinnt
 
 
     /** Returns a (deep) copy of the board array */
-    private Token[][] getCopyOfBoard()
+    public static Token[][] getCopyOfBoard()
     {
         Token[][] copiedBoard = new Token[ COLS ][ ROWS ];
         for ( int i = 0; i < copiedBoard.length; i++ ) {
-            for ( int j = 0; j < copiedBoard[ i ].length; j++ ) {
-                copiedBoard[ i ][ j ] = this.board[ i ][ j ];
-            }
+            System.arraycopy(VierGewinnt.board[i], 0, copiedBoard[i], 0, copiedBoard[i].length);
         }
         return copiedBoard;
     }
@@ -233,13 +231,37 @@ public class VierGewinnt
         presentation += rowNumbering;
         return presentation;
     }
+    public List<int []> EddieChoices(Token[][] board) {
+        ;
+        final List<int[]> choices= new ArrayList<>();
+        for (int col = 0; col < 7; col++) {
 
+            for (int row = 0; row < 7; row++) {
+                if (isColFull(col, board)) {
+                    col++;
+                } else if (board[col][row] == Token.empty) {
 
+                    choices.add(new int[]{row, col});
 
+                    break;
+                }
+            }
+
+        }
+        return choices;
+    }
+    private boolean isColFull(int col, Token[][] board) {
+        int topRow = board[col].length - 1;
+        return (board[col][topRow] != Token.empty);
+    }
     /** main method, starts the program */
     public static void main( String args[] )
     {
         VierGewinnt game = new VierGewinnt();
+//        game.DisplayEdChoices(game.board);
         game.play();
+
+
+
     }
 }
