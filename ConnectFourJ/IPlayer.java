@@ -1,7 +1,5 @@
 
-/* ************************************************************************* *\
-*                Programmierung 1 HS 2019 - Serie 5-1                         *
-\* ************************************************************************* */
+
 
 /** Interface for VierGewinnt players */
 public interface IPlayer
@@ -16,7 +14,7 @@ public interface IPlayer
      * @presumes the board is not full
      * @return the next move (number of column, starting from 0) of the player
      */
-    public int getNextColumn( Token[][] board );
+    public Object getNextColumn(Token[][] board );
 
     /**
      * Assign the player a token (e.g. 'X' or 'O')

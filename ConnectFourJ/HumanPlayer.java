@@ -1,6 +1,4 @@
-/* ************************************************************************* *\
-*                Programmierung 1 HS 2019 - Serie 5-1                         *
-\* ************************************************************************* */
+
 
 
 import java.util.Scanner;
@@ -24,7 +22,7 @@ public class HumanPlayer implements IPlayer
         }
     }
 
-    public int getNextColumn( Token[][] board )
+    public Object getNextColumn(Token[][] board )
     {
         System.out.println( "\n" + VierGewinnt.displayBoard( board ) );
         int column = -1;
