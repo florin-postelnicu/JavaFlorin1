@@ -1,6 +1,8 @@
 
 
 
+import java.io.*;
+import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,14 +14,116 @@ public class VierGewinnt
 
     public static final int COLS = 7;
     public static final int ROWS = 6;
+
     boolean done ;
 
     private static Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
     private IPlayer[] players = new IPlayer[ 2 ]; // two players
 
+    public static int[][] matrix0() throws Exception {
+        int[][] myArray;
+        FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix0.txt");
+        Scanner sc = new Scanner(new BufferedReader(fr));
+
+        int rows = 6;
+        int columns = 7;
+        myArray = new int[rows][columns];
+        while (sc.hasNextLine()) {
+            // Split in lines; number of lines = size of array
+            for (int i = 0; i < myArray.length; i++) {
+                String[] line = sc.nextLine().trim().split("   ");
+                // Split each line in entries, by reading each integer
+                // split by how many blanks are in between
+                for (int j = 0; j < line.length; j++) {
+                    myArray[i][j] = Integer.parseInt(line[j]);
+                }
+            }
+        }
+
+//             System.out.println(Arrays.deepToString(myArray));
+        return myArray;
+    }
+
+    public static int[][] matrix1() throws Exception {
+        int[][] myArray;
+        FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix1.txt");
+        Scanner sc = new Scanner(new BufferedReader(fr));
+
+
+        int rows = 6;
+        int columns = 7;
+        myArray = new int[rows][columns];
+        while (sc.hasNextLine()) {
+            // Split in lines; number of lines = size of array
+            for (int i = 0; i < myArray.length; i++) {
+                String[] line = sc.nextLine().trim().split("   ");
+                // Split each line in entries, by reading each integer
+                // split by how many blanks are in between
+                for (int j = 0; j < line.length; j++) {
+                    myArray[i][j] = Integer.parseInt(line[j]);
+                }
+            }
+        }
+
+//             System.out.println(Arrays.deepToString(myArray));
+        return myArray;
+    }
+
+
+
+    public static int[][] UpdateMatrixVec(int[][] Matrix, List<int[]> vec) {
+
+        for (int row = 0; row < 6; row++) {
+            for (int col = 0; col < 7; col++)
+                for (int[] ints : vec)
+                    if (row == ints[0] && col == ints[1]) Matrix[row][col] = Matrix[row][col] + 1;
+                    else Matrix[row][col] = Matrix[row][col];
+        }
+        return Matrix;
+
+    }
+
+    public void Write2DMatrix0(int[][] matrixes) throws Exception {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/home/florin/IdeaProjects/Viking/src/matrix0.txt")));
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 7; c++) {
+                sb.append(matrixes[r][c]).append("   ");
+            }
+            sb.append("\n");
+        }
+
+        bw.write(sb.toString());
+        bw.close();
+    }
+
+    public void Write2DMatrix1(int[][] matrixes) throws Exception {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/home/florin/IdeaProjects/Viking/src/matrix1.txt")));
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 7; c++) {
+                sb.append(matrixes[r][c]).append("   ");
+            }
+            sb.append("\n");
+        }
+
+        bw.write(sb.toString());
+        bw.close();
+    }
+
+
     /** initialize board and players and start the game */
-    public void play()
-    {
+    public void play() throws Exception {
+        // Vectors to keep the paths for Player0 and Player1
+
+
+        List<int[]> Path0 = new ArrayList<>();
+
+        List<int[]> Path1 = new ArrayList<>();
         // initialize the board
         for ( Token[] column : this.board ) {
             Arrays.fill( column, Token.empty );
@@ -45,25 +149,105 @@ public class VierGewinnt
         boolean solved = false;
         int currentPlayer = new java.util.Random().nextInt( 2 );  //choose randomly who begins
         System.out.println( "current player: " + currentPlayer );
+
         int insertCol, insertRow; // starting from 0
+        /**
+         * Path here?
+         */
         while ( !solved && !this.isBoardFull() ) {
             // get player's next "move"
             // note that we pass only a copy of the board as an argument,
             // otherwise the player would be able to manipulate the board and cheat!
+
+
             insertCol = (int) players[ currentPlayer ].getNextColumn( getCopyOfBoard() );
             // insert the token and get the row where it landed
+            /**
+             * Here is the column
+             */
             insertRow = this.insertToken( insertCol, players[ currentPlayer ].getToken() );
+            /**
+             * Here is the row
+             */
+            System.out.println("CurrentPlayer : Player" +currentPlayer+ "  col :" +insertCol + "  row : "+ insertRow);
+            /**
+             * Here should be called the method recording the path
+             * (all moves, in order made by each player)
+             *
+             *
+             *
+             * if(Player0){
+             * call Path0;}
+             * else{
+             * call Path1;}
+             */
+             if(currentPlayer == 0){
+                 Path0.add(new int[]{insertRow, insertCol});
+             }
+             else{
+                 Path1.add(new int[]{insertRow, insertCol});
+             }
             // check if the game is over
             solved = this.checkVierGewinnt( insertCol, insertRow );
+
             //switch to other player
             if ( !solved )
                 currentPlayer = ( currentPlayer + 1 ) % 2;
         }
         System.out.println( displayBoard( board ) );
-        if ( solved )
-            System.out.println( "Player " + players[ currentPlayer ].getToken() + " wins!" );
-        else
+        if ( solved ) {
+
+            System.out.println("Player " + players[currentPlayer].getToken() + " wins!");
+            if(currentPlayer == 0){
+                UpdateMatrixVec(matrix0(),Path0);
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", UpdateMatrixVec(matrix0(), Path1)[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+                Write2DMatrix0(UpdateMatrixVec(matrix0(),Path0));
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", matrix0()[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+
+               DisplayPath(Path0);}
+            else{
+                UpdateMatrixVec(matrix1(), Path1);
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", UpdateMatrixVec(matrix1(), Path1)[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+                Write2DMatrix1(UpdateMatrixVec(matrix1(), Path1) );
+
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", matrix1()[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+                DisplayPath(Path1);
+            }
+            /**
+             * Here is where the update of Matrix Memory occurs:
+             * if(Player0 wins){
+             * update Memory0}
+             * else{
+             * update Memory1}
+             */
+
+        }
+        else{
             System.out.println( "Draw! Game over." );
+            /**
+             * No updates!
+             */
+        }
     }
 
 
@@ -254,9 +438,12 @@ public class VierGewinnt
         int topRow = board[col].length - 1;
         return (board[col][topRow] != Token.empty);
     }
+    public void DisplayPath(List<int[]> path){
+        for(int indx = 0; indx <path.size(); indx++)
+            System.out.println("row : "+ path.get(indx)[0]+ "  col : "+ path.get(indx)[1]);
+    }
     /** main method, starts the program */
-    public static void main( String args[] )
-    {
+    public static void main(String[] args) throws Exception {
         VierGewinnt game = new VierGewinnt();
 //        game.DisplayEdChoices(game.board);
         game.play();
