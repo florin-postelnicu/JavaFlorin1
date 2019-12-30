@@ -2,7 +2,6 @@
 
 
 import java.io.*;
-import java.security.spec.RSAOtherPrimeInfo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,13 +15,15 @@ public class VierGewinnt
     public static final int ROWS = 6;
 
     boolean done ;
+    boolean  EddiePlayer = false;
+    public static int firstPlayer;
 
     private static Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
     private IPlayer[] players = new IPlayer[ 2 ]; // two players
 
-    public static int[][] matrix0() throws Exception {
+    public static int[][] matrix2() throws Exception {
         int[][] myArray;
-        FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix0.txt");
+        FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix2.txt");
         Scanner sc = new Scanner(new BufferedReader(fr));
 
         int rows = 6;
@@ -31,7 +32,7 @@ public class VierGewinnt
         while (sc.hasNextLine()) {
             // Split in lines; number of lines = size of array
             for (int i = 0; i < myArray.length; i++) {
-                String[] line = sc.nextLine().trim().split("   ");
+                String[] line = sc.nextLine().trim().split(" {3}");
                 // Split each line in entries, by reading each integer
                 // split by how many blanks are in between
                 for (int j = 0; j < line.length; j++) {
@@ -56,7 +57,7 @@ public class VierGewinnt
         while (sc.hasNextLine()) {
             // Split in lines; number of lines = size of array
             for (int i = 0; i < myArray.length; i++) {
-                String[] line = sc.nextLine().trim().split("   ");
+                String[] line = sc.nextLine().trim().split(" {3}");
                 // Split each line in entries, by reading each integer
                 // split by how many blanks are in between
                 for (int j = 0; j < line.length; j++) {
@@ -83,8 +84,8 @@ public class VierGewinnt
 
     }
 
-    public void Write2DMatrix0(int[][] matrixes) throws Exception {
-        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/home/florin/IdeaProjects/Viking/src/matrix0.txt")));
+    public void Write2DMatrix2(int[][] matrixes) throws Exception {
+        BufferedWriter bw = new BufferedWriter(new FileWriter(new File("/home/florin/IdeaProjects/Viking/src/matrix2.txt")));
 
         StringBuilder sb = new StringBuilder();
 
@@ -121,11 +122,11 @@ public class VierGewinnt
         // Vectors to keep the paths for Player0 and Player1
 
 
-        List<int[]> Path0 = new ArrayList<>();
+        List<int[]> Path2= new ArrayList<>();
 
         List<int[]> Path1 = new ArrayList<>();
         // initialize the board
-        for ( Token[] column : this.board ) {
+        for ( Token[] column : board ) {
             Arrays.fill( column, Token.empty );
         }
 
@@ -141,6 +142,7 @@ public class VierGewinnt
             players[ 1 ] = new HumanPlayer();
         } else {
             players[ 1 ] = new ComputerPlayer();
+            EddiePlayer = true;
         }
         players[ 0 ].setToken( Token.player1 );
         players[ 1 ].setToken( Token.player2 );
@@ -148,6 +150,7 @@ public class VierGewinnt
         /* play... */
         boolean solved = false;
         int currentPlayer = new java.util.Random().nextInt( 2 );  //choose randomly who begins
+        firstPlayer = currentPlayer;
         System.out.println( "current player: " + currentPlayer );
 
         int insertCol, insertRow; // starting from 0
@@ -181,11 +184,11 @@ public class VierGewinnt
              * else{
              * call Path1;}
              */
-             if(currentPlayer == 0){
-                 Path0.add(new int[]{insertRow, insertCol});
+             if(currentPlayer== firstPlayer ){
+                 Path1.add(new int[]{insertRow, insertCol});
              }
              else{
-                 Path1.add(new int[]{insertRow, insertCol});
+                 Path2.add(new int[]{insertRow, insertCol});
              }
             // check if the game is over
             solved = this.checkVierGewinnt( insertCol, insertRow );
@@ -198,40 +201,41 @@ public class VierGewinnt
         if ( solved ) {
 
             System.out.println("Player " + players[currentPlayer].getToken() + " wins!");
-            if(currentPlayer == 0){
-                UpdateMatrixVec(matrix0(),Path0);
-                for( int row = 0; row<6; row++){
-                    for(int col = 0; col< 7; col++){
-                        System.out.printf("%10d", UpdateMatrixVec(matrix0(), Path1)[row][col]);
-                    }
-                    System.out.println("\n");
-                }
-                Write2DMatrix0(UpdateMatrixVec(matrix0(),Path0));
-                for( int row = 0; row<6; row++){
-                    for(int col = 0; col< 7; col++){
-                        System.out.printf("%10d", matrix0()[row][col]);
-                    }
-                    System.out.println("\n");
-                }
-
-               DisplayPath(Path0);}
-            else{
-                UpdateMatrixVec(matrix1(), Path1);
+            System.out.println("FirstPlayer  :" + firstPlayer);
+            if(currentPlayer == firstPlayer){
+                UpdateMatrixVec(matrix1(),Path1);
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
                         System.out.printf("%10d", UpdateMatrixVec(matrix1(), Path1)[row][col]);
                     }
                     System.out.println("\n");
                 }
-                Write2DMatrix1(UpdateMatrixVec(matrix1(), Path1) );
-
+                Write2DMatrix1(UpdateMatrixVec(matrix1(),Path1));
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
                         System.out.printf("%10d", matrix1()[row][col]);
                     }
                     System.out.println("\n");
                 }
-                DisplayPath(Path1);
+
+               DisplayPath(Path1);}
+            else{
+                UpdateMatrixVec(matrix2(), Path2);
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", UpdateMatrixVec(matrix2(), Path2)[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+                Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2) );
+
+                for( int row = 0; row<6; row++){
+                    for(int col = 0; col< 7; col++){
+                        System.out.printf("%10d", matrix2()[row][col]);
+                    }
+                    System.out.println("\n");
+                }
+                DisplayPath(Path2);
             }
             /**
              * Here is where the update of Matrix Memory occurs:
@@ -258,7 +262,7 @@ public class VierGewinnt
      * @return the row where the token landed
      */
     private int insertToken( int column, Token tok ) {
-        //TODO: Your code goes here
+
         int retrow = -1;
         for (int row = 0; row <board[0].length ; row++) {
             if (board[column][row] == Token.empty ) {
@@ -278,7 +282,7 @@ public class VierGewinnt
      * @returns true, iff the board is full.
      */
     private boolean isBoardFull() {
-        //TODO: Your code goes here
+
         int topRow = board[0].length - 1;
         for (int column = 0; column < 7; column++) {
             if (board[column][topRow] == Token.empty) {
@@ -362,22 +366,17 @@ public class VierGewinnt
             return true;
         }
         // back pos 3
-        else if ((col+1)<7 && (row-1)>=0 && (col-2)>=0 && (row+2)<6 &&
+        else //TODO: Replace this line!}
+            if ((col+1)<7 && (row-1)>=0 && (col-2)>=0 && (row+2)<6 &&
                 board[col][row]==board[col+1][row-1] &&
                 board[col+1][row-1]==board[col-1][row+1] && board[col-1][row+1]==board[col-2][row+2]){
 
             return true;
         }
         // back pos 4
-        else if((col-3)>=0 && (row+3)<6 &&
-                board[col][row] ==board[col-1][row +1] &&
-                board[col-1][row+1]==board[col-2][row+2] && board[col-2][row+2]==board[col-3][row +3]){
-
-            return true;
-        }
-
-        else
-            return false; //TODO: Replace this line!}
+        else return (col - 3) >= 0 && (row + 3) < 6 &&
+                    board[col][row] == board[col - 1][row + 1] &&
+                    board[col - 1][row + 1] == board[col - 2][row + 2] && board[col - 2][row + 2] == board[col - 3][row + 3];
     }
 
 
@@ -416,7 +415,7 @@ public class VierGewinnt
         return presentation;
     }
     public List<int []> EddieChoices(Token[][] board) {
-        ;
+
         final List<int[]> choices= new ArrayList<>();
         for (int col = 0; col < 7; col++) {
 
