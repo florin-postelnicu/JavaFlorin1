@@ -220,10 +220,10 @@ public class ComputerPlayer implements IPlayer {
     }
 
 
-    public void DisplayEddieChoices(List<int []> Choices){
-        for(int index = 0; index < Choices.size(); index++)
-            System.out.println("col : " + Choices.get(index)[1] + "  row  :" + Choices.get(index)[0]);
-    }
+//    public void DisplayEddieChoices(List<int []> Choices){
+//        for(int index = 0; index < Choices.size(); index++)
+//            System.out.println("col : " + Choices.get(index)[1] + "  row  :" + Choices.get(index)[0]);
+//    }
 
 
 
