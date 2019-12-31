@@ -2,10 +2,7 @@
 
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class VierGewinnt
@@ -72,12 +69,12 @@ public class VierGewinnt
 
 
 
-    public static int[][] UpdateMatrixVec(int[][] Matrix, List<int[]> vec) {
+    public static int[][] UpdateMatrixVec(int[][] Matrix, List<int[]> vec, int increment) {
 
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 7; col++)
                 for (int[] ints : vec)
-                    if (row == ints[0] && col == ints[1]) Matrix[row][col] = Matrix[row][col] + 1;
+                    if (row == ints[0] && col == ints[1]) Matrix[row][col] = Matrix[row][col] +  increment;
                     else Matrix[row][col] = Matrix[row][col];
         }
         return Matrix;
@@ -193,14 +190,28 @@ public class VierGewinnt
             System.out.println("Player " + players[currentPlayer].getToken() + " wins!");
             System.out.println("FirstPlayer  :" + firstPlayer);
             if(currentPlayer == firstPlayer){
-                UpdateMatrixVec(matrix1(),Path1);
+                UpdateMatrixVec(matrix1(),Path1, 1);
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
-                        System.out.printf("%10d", UpdateMatrixVec(matrix1(), Path1)[row][col]);
+                        System.out.printf("%10d", UpdateMatrixVec(matrix1(), Path1, 1)[row][col]);
                     }
                     System.out.println("\n");
                 }
-                Write2DMatrix1(UpdateMatrixVec(matrix1(),Path1));
+                Write2DMatrix1(UpdateMatrixVec(matrix1(),Path1, 1));
+                System.out.println("Path2 size : " + Path2.size() );
+                System.out.println("Path2 Last element  : " + Arrays.toString(Path2.get(Path2.size() - 1)));
+                int len2 = Path2.size()-1;
+                System.out.println("Row : " + Path2.get(len2)[0]);
+                int rowp2 = Path2.get(len2)[0];
+                System.out.println("Col : " + Path2.get(len2)[1]);
+                int colp2 = Path2.get(len2)[1];
+                System.out.println("matrix2()  : " + matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]]);
+                int decrp2 = -matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]];
+
+                // Attempt to get punished for loosing
+                Write2DMatrix2(UpdateMatrixVec(matrix2(), Collections.singletonList(new int[]{rowp2, colp2}), decrp2));
+
+//                Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2.get(Path2.size()-1), - matrix2()[Path2.get(Path2.size()-1)[0]][ Path2.get(Path2.size()-1)[1]]));
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
                         System.out.printf("%10d", matrix1()[row][col]);
@@ -210,14 +221,25 @@ public class VierGewinnt
 
                DisplayPath(Path1);}
             else{
-                UpdateMatrixVec(matrix2(), Path2);
+                UpdateMatrixVec(matrix2(), Path2, 1);
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
-                        System.out.printf("%10d", UpdateMatrixVec(matrix2(), Path2)[row][col]);
+                        System.out.printf("%10d", UpdateMatrixVec(matrix2(), Path2, 1)[row][col]);
                     }
                     System.out.println("\n");
                 }
-                Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2) );
+                Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2, 1) );
+
+                System.out.println("Path1 size : " + Path1.size() );
+                System.out.println("Path1 Last element  : " + Arrays.toString(Path1.get(Path1.size() - 1)));
+                int len1 = Path1.size()-1;
+                System.out.println("Row : " + Path1.get(len1)[0]);
+                int rowp1 = Path1.get(len1)[0];
+                System.out.println("Col : " + Path1.get(len1)[1]);
+                int colp1 = Path1.get(len1)[1];
+                System.out.println("matrix1()  : " + matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]]);
+                int decrp1 = -matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]];
+                Write2DMatrix1(UpdateMatrixVec(matrix1(), Collections.singletonList(new int[]{rowp1, colp1}), decrp1));
 
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
