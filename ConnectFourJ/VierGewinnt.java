@@ -173,17 +173,7 @@ public class VierGewinnt
              * Here is the row
              */
             System.out.println("CurrentPlayer : Player" +currentPlayer+ "  col :" +insertCol + "  row : "+ insertRow);
-            /**
-             * Here should be called the method recording the path
-             * (all moves, in order made by each player)
-             *
-             *
-             *
-             * if(Player0){
-             * call Path0;}
-             * else{
-             * call Path1;}
-             */
+
              if(currentPlayer== firstPlayer ){
                  Path1.add(new int[]{insertRow, insertCol});
              }
