@@ -113,9 +113,47 @@ public class VierGewinnt
         bw.close();
     }
 
+    public static int[] BackTracking(int [][]matrix,  List<int []> vec){
+        int[] punish = new int[3];
+        int count = vec.size() -1;
+        for(int i = count; count >= 0; count--){
+            int rowp = vec.get(count)[0];
+            int colp = vec.get(count)[1];
+            if(matrix[rowp][colp] != 0){
+                int valp = matrix[rowp][colp];
+                punish[0] = rowp;
+                punish[1] = colp;
+                punish[2] = valp;
+                break;
+            }
+
+        }
+        // Attn to all are zeros
+        return punish;
+    }
+
 
     /** initialize board and players and start the game */
     public void play() throws Exception {
+
+
+        // The starting matrices
+        System.out.println(" Matrix 1 ");
+
+        for( int row = 0; row<6; row++){
+            for(int col = 0; col< 7; col++){
+                System.out.printf("%10d", matrix1()[row][col]);
+            }
+            System.out.println("\n");
+        }
+
+        System.out.println(" Matrix 2");
+        for( int row = 0; row<6; row++){
+            for(int col = 0; col< 7; col++){
+                System.out.printf("%10d", matrix2()[row][col]);
+            }
+            System.out.println("\n");
+        }
         // Vectors to keep the paths for Player0 and Player1
 
 
@@ -198,20 +236,32 @@ public class VierGewinnt
                     System.out.println("\n");
                 }
                 Write2DMatrix1(UpdateMatrixVec(matrix1(),Path1, 1));
-                System.out.println("Path2 size : " + Path2.size() );
-                System.out.println("Path2 Last element  : " + Arrays.toString(Path2.get(Path2.size() - 1)));
-                int len2 = Path2.size()-1;
-                System.out.println("Row : " + Path2.get(len2)[0]);
-                int rowp2 = Path2.get(len2)[0];
-                System.out.println("Col : " + Path2.get(len2)[1]);
-                int colp2 = Path2.get(len2)[1];
-                System.out.println("matrix2()  : " + matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]]);
-                int decrp2 = -matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]];
+
+                // Call Backtracking for matrix2(), and Path2
+
+//
+//                System.out.println("Path2 size : " + Path2.size() );
+//                System.out.println("Path2 Last element  : " + Arrays.toString(Path2.get(Path2.size() - 1)));
+//                int len2 = Path2.size()-1;
+//                System.out.println("Row : " + Path2.get(len2)[0]);
+//                int rowp2 = Path2.get(len2)[0];
+//                System.out.println("Col : " + Path2.get(len2)[1]);
+//                int colp2 = Path2.get(len2)[1];
+//                System.out.println("matrix2()  : " + matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]]);
+//                int decrp2 = -matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]];
+//                Write2DMatrix2(UpdateMatrixVec(matrix2(), Collections.singletonList(new int[]{rowp2, colp2}), decrp2));
+
 
                 // Attempt to get punished for loosing
-                Write2DMatrix2(UpdateMatrixVec(matrix2(), Collections.singletonList(new int[]{rowp2, colp2}), decrp2));
 
-//                Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2.get(Path2.size()-1), - matrix2()[Path2.get(Path2.size()-1)[0]][ Path2.get(Path2.size()-1)[1]]));
+                int rowp2b = BackTracking(matrix2(), Path2)[0];
+                int colp2b = BackTracking(matrix2(), Path2)[1];
+                int decrp2b = -BackTracking(matrix2(), Path2)[2];
+                System.out.println("Row :" + rowp2b + "  Col : " + colp2b + "  value  :" + decrp2b );
+
+                Write2DMatrix2(UpdateMatrixVec(matrix2(), Collections.singletonList(new int[]{rowp2b, colp2b}), decrp2b));
+
+
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
                         System.out.printf("%10d", matrix1()[row][col]);
@@ -230,16 +280,25 @@ public class VierGewinnt
                 }
                 Write2DMatrix2(UpdateMatrixVec(matrix2(), Path2, 1) );
 
-                System.out.println("Path1 size : " + Path1.size() );
-                System.out.println("Path1 Last element  : " + Arrays.toString(Path1.get(Path1.size() - 1)));
-                int len1 = Path1.size()-1;
-                System.out.println("Row : " + Path1.get(len1)[0]);
-                int rowp1 = Path1.get(len1)[0];
-                System.out.println("Col : " + Path1.get(len1)[1]);
-                int colp1 = Path1.get(len1)[1];
-                System.out.println("matrix1()  : " + matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]]);
-                int decrp1 = -matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]];
-                Write2DMatrix1(UpdateMatrixVec(matrix1(), Collections.singletonList(new int[]{rowp1, colp1}), decrp1));
+                // Call Backtracking for matrix1(), and Path1
+
+//                System.out.println("Path1 size : " + Path1.size() );
+//                System.out.println("Path1 Last element  : " + Arrays.toString(Path1.get(Path1.size() - 1)));
+//                int len1 = Path1.size()-1;
+//                System.out.println("Row : " + Path1.get(len1)[0]);
+//                int rowp1 = Path1.get(len1)[0];
+//                System.out.println("Col : " + Path1.get(len1)[1]);
+//                int colp1 = Path1.get(len1)[1];
+//                System.out.println("matrix1()  : " + matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]]);
+//                int decrp1 = -matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]];
+
+                int rowp1b = BackTracking(matrix1(), Path1)[0];
+                int colp1b = BackTracking(matrix1(), Path1)[1];
+                int decrp1b = -BackTracking(matrix1(), Path1)[2];
+                System.out.println("Row :" + rowp1b + "  Col : " + colp1b + "  value  :" + decrp1b );
+                Write2DMatrix1(UpdateMatrixVec(matrix1(), Collections.singletonList(new int[]{rowp1b, colp1b}), decrp1b));
+
+//                Write2DMatrix1(UpdateMatrixVec(matrix1(), Collections.singletonList(new int[]{rowp1, colp1}), decrp1));
 
                 for( int row = 0; row<6; row++){
                     for(int col = 0; col< 7; col++){
@@ -432,13 +491,15 @@ public class VierGewinnt
         for (int col = 0; col < 7; col++) {
 
             for (int row = 0; row < 7; row++) {
-                if (isColFull(col, board)) {
+                if (!isColFull(col, board)) {
+                    if (board[col][row] == Token.empty) {
+
+                        choices.add(new int[]{row, col});
+
+                        break;
+                    }
+                } else {
                     col++;
-                } else if (board[col][row] == Token.empty) {
-
-                    choices.add(new int[]{row, col});
-
-                    break;
                 }
             }
 
