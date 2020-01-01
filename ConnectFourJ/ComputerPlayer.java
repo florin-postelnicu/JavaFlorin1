@@ -105,16 +105,10 @@ public class ComputerPlayer implements IPlayer {
             return true;
         }
         // back pos 4
-        else if((col-3)>=0 && (row+3)<6 &&
-                board[col-1][row+1]!= Token.empty &&
-                board[col-1][row+1]==board[col-2][row+2] &&
-                board[col-2][row+2]==board[col-3][row +3]){
-
-            return true;
-        }
-
-        else
-            return false;
+        else return (col - 3) >= 0 && (row + 3) < 6 &&
+                    board[col - 1][row + 1] != Token.empty &&
+                    board[col - 1][row + 1] == board[col - 2][row + 2] &&
+                    board[col - 2][row + 2] == board[col - 3][row + 3];
     }
     public static int[][] EddieMemory() throws Exception {
         int[][] myEddie;
@@ -134,10 +128,10 @@ public class ComputerPlayer implements IPlayer {
 
     public static List<int []> VectorChoices(int[][] eddieMemory, List<int []> eddieChoices){
         List<int []> myVectorChoices = new ArrayList<>();
-        for(int indx = 0; indx < eddieChoices.size(); indx++){
-            int valed = eddieMemory[eddieChoices.get(indx)[0]][eddieChoices.get(indx)[1]];
-            int rowed = eddieChoices.get(indx)[0];
-            int coled = eddieChoices.get(indx)[1];
+        for (int[] eddieChoice : eddieChoices) {
+            int valed = eddieMemory[eddieChoice[0]][eddieChoice[1]];
+            int rowed = eddieChoice[0];
+            int coled = eddieChoice[1];
             myVectorChoices.add(new int[]{valed, rowed, coled});
         }
 
