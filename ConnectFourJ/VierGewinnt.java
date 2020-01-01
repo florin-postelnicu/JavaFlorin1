@@ -166,6 +166,8 @@ public class VierGewinnt
 
         /* initialize players */
         players[ 0 ] = new HumanPlayer();
+//        players[0] = new ComputerPlayer();
+//        players[1] = new ComputerPlayer();
         System.out.print( "Play against a human opponent? (y / n) " );
         String opponent = new Scanner( System.in ).nextLine().toLowerCase();
         while ( ( 1 != opponent.length() ) || (!"yn".contains(opponent)) ) {
@@ -450,17 +452,21 @@ public class VierGewinnt
         final List<int[]> choices= new ArrayList<>();
         for (int col = 0; col < 7; col++) {
 
-            for (int row = 0; row < 7; row++) {
+
+            for (int row = 0; row < 6; row++) {
                 if (!isColFull(col, board)) {
-                    if (board[col][row] == Token.empty) {
+                   if (board[col][row] == Token.empty) {
 
-                        choices.add(new int[]{row, col});
+                       choices.add(new int[]{row, col});
 
-                        break;
-                    }
-                } else {
-                    col++;
-                }
+                       break;
+                   }
+               } else {
+                   col++;
+                   if(col>= 7){
+                       break;
+                   }
+               }
             }
 
         }
@@ -475,9 +481,13 @@ public class VierGewinnt
     }
     /** main method, starts the program */
     public static void main(String[] args) throws Exception {
-        VierGewinnt game = new VierGewinnt();
+        for(int i = 0; i< 25; i++) {
+
+            VierGewinnt game = new VierGewinnt();
 //        game.DisplayEdChoices(game.board);
-        game.play();
+            System.out.println("First Eddie vs Eddie game!");
+            game.play();
+        }
 
 
 
