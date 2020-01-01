@@ -11,7 +11,6 @@ public class VierGewinnt
     public static final int COLS = 7;
     public static final int ROWS = 6;
 
-    boolean done ;
     boolean  EddiePlayer = false;
     public static int firstPlayer;
 
@@ -116,9 +115,9 @@ public class VierGewinnt
     public static int[] BackTracking(int [][]matrix,  List<int []> vec){
         int[] punish = new int[3];
         int count = vec.size() -1;
-        for(int i = count; count >= 0; count--){
-            int rowp = vec.get(count)[0];
-            int colp = vec.get(count)[1];
+        for(int i = count; i>= 0; i--){
+            int rowp = vec.get(i)[0];
+            int colp = vec.get(i)[1];
             if(matrix[rowp][colp] != 0){
                 int valp = matrix[rowp][colp];
                 punish[0] = rowp;
@@ -169,7 +168,7 @@ public class VierGewinnt
         players[ 0 ] = new HumanPlayer();
         System.out.print( "Play against a human opponent? (y / n) " );
         String opponent = new Scanner( System.in ).nextLine().toLowerCase();
-        while ( ( 1 != opponent.length() ) || ( -1 == ( "yn".indexOf ( opponent ) ) ) ) {
+        while ( ( 1 != opponent.length() ) || (!"yn".contains(opponent)) ) {
             System.out.print( "Can't understand your answer. Play against a human opponent? (y / n) " );
             opponent = new Scanner( System.in ).nextLine().toLowerCase();
         }
@@ -189,9 +188,6 @@ public class VierGewinnt
         System.out.println( "current player: " + currentPlayer );
 
         int insertCol, insertRow; // starting from 0
-        /**
-         * Path here?
-         */
         while ( !solved && !this.isBoardFull() ) {
             // get player's next "move"
             // note that we pass only a copy of the board as an argument,
@@ -200,13 +196,7 @@ public class VierGewinnt
 
             insertCol = (int) players[ currentPlayer ].getNextColumn( getCopyOfBoard() );
             // insert the token and get the row where it landed
-            /**
-             * Here is the column
-             */
             insertRow = this.insertToken( insertCol, players[ currentPlayer ].getToken() );
-            /**
-             * Here is the row
-             */
             System.out.println("CurrentPlayer : Player" +currentPlayer+ "  col :" +insertCol + "  row : "+ insertRow);
 
              if(currentPlayer== firstPlayer ){
@@ -239,17 +229,6 @@ public class VierGewinnt
 
                 // Call Backtracking for matrix2(), and Path2
 
-//
-//                System.out.println("Path2 size : " + Path2.size() );
-//                System.out.println("Path2 Last element  : " + Arrays.toString(Path2.get(Path2.size() - 1)));
-//                int len2 = Path2.size()-1;
-//                System.out.println("Row : " + Path2.get(len2)[0]);
-//                int rowp2 = Path2.get(len2)[0];
-//                System.out.println("Col : " + Path2.get(len2)[1]);
-//                int colp2 = Path2.get(len2)[1];
-//                System.out.println("matrix2()  : " + matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]]);
-//                int decrp2 = -matrix2()[Path1.get(len2)[0]][Path1.get(len2)[1]];
-//                Write2DMatrix2(UpdateMatrixVec(matrix2(), Collections.singletonList(new int[]{rowp2, colp2}), decrp2));
 
 
                 // Attempt to get punished for loosing
@@ -282,15 +261,6 @@ public class VierGewinnt
 
                 // Call Backtracking for matrix1(), and Path1
 
-//                System.out.println("Path1 size : " + Path1.size() );
-//                System.out.println("Path1 Last element  : " + Arrays.toString(Path1.get(Path1.size() - 1)));
-//                int len1 = Path1.size()-1;
-//                System.out.println("Row : " + Path1.get(len1)[0]);
-//                int rowp1 = Path1.get(len1)[0];
-//                System.out.println("Col : " + Path1.get(len1)[1]);
-//                int colp1 = Path1.get(len1)[1];
-//                System.out.println("matrix1()  : " + matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]]);
-//                int decrp1 = -matrix1()[Path1.get(len1)[0]][Path1.get(len1)[1]];
 
                 int rowp1b = BackTracking(matrix1(), Path1)[0];
                 int colp1b = BackTracking(matrix1(), Path1)[1];
@@ -308,20 +278,10 @@ public class VierGewinnt
                 }
                 DisplayPath(Path2);
             }
-            /**
-             * Here is where the update of Matrix Memory occurs:
-             * if(Player0 wins){
-             * update Memory0}
-             * else{
-             * update Memory1}
-             */
 
         }
         else{
             System.out.println( "Draw! Game over." );
-            /**
-             * No updates!
-             */
         }
     }
 
@@ -466,24 +426,24 @@ public class VierGewinnt
     public static String displayBoard( Token[][] myBoard )
     {
         String rowDelimiter = "+";
-        String rowNumbering = " ";
+        StringBuilder rowNumbering = new StringBuilder(" ");
         for ( int col = 0; col < myBoard.length; col++ ) {
             rowDelimiter += "---+";
-            rowNumbering += " " + ( col + 1 ) + "  ";
+            rowNumbering.append(" ").append(col + 1).append("  ");
         }
         rowDelimiter += "\n";
 
-        String rowStr;
-        String presentation = rowDelimiter;
+        StringBuilder rowStr;
+        StringBuilder presentation = new StringBuilder(rowDelimiter);
         for ( int row = myBoard[ 0 ].length - 1; row >= 0; row-- ) {
-            rowStr = "| ";
-            for ( int col = 0; col < myBoard.length; col++ ) {
-                rowStr += myBoard[ col ][ row ].toString() + " | ";
+            rowStr = new StringBuilder("| ");
+            for (Token[] tokens : myBoard) {
+                rowStr.append(tokens[row].toString()).append(" | ");
             }
-            presentation += rowStr + "\n" + rowDelimiter;
+            presentation.append(rowStr).append("\n").append(rowDelimiter);
         }
-        presentation += rowNumbering;
-        return presentation;
+        presentation.append(rowNumbering);
+        return presentation.toString();
     }
     public List<int []> EddieChoices(Token[][] board) {
 
@@ -511,8 +471,7 @@ public class VierGewinnt
         return (board[col][topRow] != Token.empty);
     }
     public void DisplayPath(List<int[]> path){
-        for(int indx = 0; indx <path.size(); indx++)
-            System.out.println("row : "+ path.get(indx)[0]+ "  col : "+ path.get(indx)[1]);
+        for (int[] ints : path) System.out.println("row : " + ints[0] + "  col : " + ints[1]);
     }
     /** main method, starts the program */
     public static void main(String[] args) throws Exception {
