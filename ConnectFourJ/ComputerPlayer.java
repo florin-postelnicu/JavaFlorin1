@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /** A very stupid computer player */
@@ -115,11 +116,11 @@ public class ComputerPlayer implements IPlayer {
 
 
         if(VierGewinnt.firstPlayer == 1){
-            myEddie= VierGewinnt.matrix1();
+            myEddie= MainConnect4.matrix1();
 
         }
         else{
-            myEddie = VierGewinnt.matrix2();
+            myEddie = MainConnect4.matrix2();
         }
 
         return myEddie;
@@ -191,8 +192,10 @@ public class ComputerPlayer implements IPlayer {
 
 
         System.out.println("I've been here!");
-        VierGewinnt vg = new VierGewinnt();
-        int  col = MaxOlista1( VectorChoices(EddieMemory(), vg.EddieChoices(board)));
+        MainConnect4 vg = new MainConnect4();
+        int  col;
+        col = MaxOlista1( VectorChoices(EddieMemory(),
+                Collections.unmodifiableList(vg.EddieChoices(board))));
 
         while ( isColFull( col, board ) ) {
             col = ( col + 1 ) % board.length;
