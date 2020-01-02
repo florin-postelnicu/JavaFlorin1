@@ -24,7 +24,7 @@ public class HumanPlayer implements IPlayer
 
     public Object getNextColumn(Token[][] board )
     {
-        System.out.println( "\n" + VierGewinnt.displayBoard( board ) );
+        System.out.println( "\n" + MainConnect4.displayBoard( board ) );
         int column = -1;
         while ( column < 0 || column >= board.length ) {
             System.out.print( "Player " + this.token.toString()
