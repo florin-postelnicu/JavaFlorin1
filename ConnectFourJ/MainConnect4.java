@@ -226,7 +226,7 @@ public class MainConnect4
                 Path2.add(new int[]{insertRow, insertCol});
             }
             // check if the game is over
-            solved = this.checkVierGewinnt( insertCol, insertRow );
+            solved = this.checkWin( insertCol, insertRow );//checkwin
 
             //switch to other player
             if ( !solved )
@@ -351,7 +351,7 @@ public class MainConnect4
      * Checks for at least four equal tokens in a row in
      * either direction, starting from the given position.
      */
-    private boolean checkVierGewinnt( int col, int row )
+    private boolean checkWin( int col, int row )// checkwin
     {
         //TODO: Your code goes here
 
