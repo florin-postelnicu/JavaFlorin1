@@ -16,18 +16,72 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.*;
 
- class Matrix {
+import static java.lang.Integer.parseInt;
+
+class Matrix {
      private static int[] add;
 
 
      //Read to the Matrix
+//     public static int [][][] winloss3d2() throws  Exception{
+//         int [][][] my3dmatrix;
+////         List<List<int []>> vicol = new ArrayList<>();
+////         List<int []> vrow = new ArrayList<>();
+//         FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/WinLoss2.txt");
+//         Scanner sc = new Scanner(new BufferedReader(fr));
+//         int rows = 6;
+//         int cols = 7;
+//         int depth = 2;
+//         my3dmatrix = new int[rows][cols][depth];
+//
+//         while( sc.hasNextLine()){
+//             for( int col = 0; col< cols; col++){
+//
+//                 for( int row = 0; row< rows; row++){
+//                     String[] line = sc.nextLine().trim().split("   ");
+//                     for( int d = 0; d< depth; d++){
+//                         my3dmatrix[col][row][d]  = parseInt(line[d]);
+//                     }
+//                 }
+////                 vicol.add(vrow);
+//             }
+//
+//         }
+//       return my3dmatrix;
+//     }
+
+     public static List<List<int []>> WinLoss1() throws Exception{
+         List<List< int []>>  WinLoss =  new ArrayList<>();
+         List<int []> vrow = new ArrayList<>();
+         FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/WinLoss2.txt");
+         Scanner sc = new Scanner(new BufferedReader(fr));
+
+
+         while (sc.hasNextLine()){
+             for(int crol = 0; crol < 7; crol++){
+
+                     String[] line = sc.nextLine().trim().split("   ");
+                 System.out.println(line.length);
+                 System.out.println();
+
+                 for( int nrol = 0; nrol<12; nrol++){
+                     vrow.add(new int[] {parseInt(line[nrol]), parseInt(line[nrol])});
+
+
+                 }
+                 WinLoss.add(vrow);
+             }
+         }
+         return WinLoss;
+     }
+
 
      // I am creating a Temp matrix
 
      @NotNull
-     public static int[][] MatrixM() throws Exception {
+     public static int[][] MatrixM(String filename) throws Exception {
          int[][] myArray;
-         FileReader fr = new FileReader("/home/florin/IdeaProjects/Viking/src/matrix0.txt");
+         FileReader fr = new FileReader(filename);
          Scanner sc = new Scanner(new BufferedReader(fr));
 
 
@@ -41,7 +95,7 @@ import java.util.*;
                  // Split each line in entries, by reading each integer
                  // split by how many blanks are in between
                  for (int j = 0; j < line.length; j++) {
-                     myArray[i][j] = Integer.parseInt(line[j]);
+                     myArray[i][j] = parseInt(line[j]);
                  }
              }
          }
@@ -49,6 +103,8 @@ import java.util.*;
 //             System.out.println(Arrays.deepToString(myArray));
          return myArray;
      }
+
+
 
 
 
@@ -66,6 +122,23 @@ import java.util.*;
 
          bw.write(sb.toString());
          bw.close();
+     }
+
+     public static void Write2FileMatrix(int [][] matrix, String filename) throws IOException {
+         BufferedWriter bw = new BufferedWriter(new FileWriter(new File(filename)));
+
+         StringBuilder sb = new StringBuilder();
+         for (int r = 0; r < 6; r++) {
+             for (int c = 0; c < 7; c++) {
+                 sb.append(matrix[r][c]).append("   ");
+             }
+             sb.append("\n");
+         }
+
+         bw.write(sb.toString());
+         bw.close();
+
+
      }
 
 
@@ -145,7 +218,7 @@ import java.util.*;
                  // Split each line in entries, by reading each integer
                  // split by how many blanks are in between
                  for (int j = 0; j < line.length; j++) {
-                     myArray[i][j] = Integer.parseInt(line[j]);
+                     myArray[i][j] = parseInt(line[j]);
                  }
              }
          }
@@ -170,7 +243,7 @@ import java.util.*;
                  // Split each line in entries, by reading each integer
                  // split by how many blanks are in between
                  for (int j = 0; j < line.length; j++) {
-                     myArray[i][j] = Integer.parseInt(line[j]);
+                     myArray[i][j] = parseInt(line[j]);
                  }
              }
          }
@@ -219,6 +292,69 @@ import java.util.*;
              }
          }
      }
+
+     // Update Wins and  Losses for each player
+     public void UpdateWin(List<List<int[]>> matrix, List<int[]> vec) throws  NullPointerException, IOException{
+         //It should be provided the right file name: here is for 1st Player WinLoss1
+         FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss1.txt");
+         PrintWriter printWriter = new PrintWriter(fileWriter);
+
+       for( int rol = 0; rol< 6; rol++){
+           for(int col = 0; col < 7; col ++){
+               for(int[] ints : vec){
+                   if(matrix.get(col).equals(ints[1]) && matrix.get(col).get(rol).equals(ints[0])){
+                       matrix.get(rol).get(col)[0] =  matrix.get(rol).get(col)[0] +1;
+                       matrix.get(rol).get(col)[1] =  matrix.get(rol).get(col)[1];
+                   }
+                   else{
+                       matrix.get(rol).get(col)[1] =  matrix.get(rol).get(col)[1] ;
+                       matrix.get(rol).get(col)[0] =  matrix.get(rol).get(col)[1];
+                   }
+               }
+
+               printWriter.printf("%10d,%2d",matrix.get(rol).get(col)[0],matrix.get(rol).get(col)[1]);
+           }
+           printWriter.println("\n");
+       }
+
+
+     }
+
+     public void UpdateLoss(List<List<int[]>> matrix, List<int[]> vec) throws  NullPointerException, IOException{
+         //It should be provided the right file name: here is for 1st Player WinLoss1
+         FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss1.txt");
+         PrintWriter printWriter = new PrintWriter(fileWriter);
+
+         for( int rol = 0; rol< 6; rol++){
+             for(int col = 0; col < 7; col ++){
+                 for(int[] ints : vec){
+                     if(matrix.get(col).equals(ints[1]) && matrix.get(col).get(rol).equals(ints[0])){
+                         matrix.get(rol).get(col)[0] =  matrix.get(rol).get(col)[0] ;
+                         matrix.get(rol).get(col)[1] =  matrix.get(rol).get(col)[1] + 1;
+                     }
+                     else{
+                         matrix.get(rol).get(col)[1] =  matrix.get(rol).get(col)[1] ;
+                         matrix.get(rol).get(col)[0] =  matrix.get(rol).get(col)[1];
+                     }
+                 }
+
+                 printWriter.printf("%10d,%2d",matrix.get(rol).get(col)[0],matrix.get(rol).get(col)[1]);
+             }
+             printWriter.println("\n");
+         }
+
+
+     }
+
+     public static void WriteZMatrix(int[][] matrix){
+         for (int[] ints : matrix) {
+             for (int row = 0; row < matrix[0].length; row++) {
+                 System.out.printf("%7d", ints[row]);
+
+             }
+             System.out.println("\n");
+         }
+     }
  }
 
 
@@ -226,29 +362,80 @@ import java.util.*;
 //
 
 public class TestMatrixM {
-    public static void main(String[] args) throws NullPointerException, IOException {
-        FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss1.txt");
+    public static void main(String[] args) throws Exception {
+        System.out.println("Matrix1");
+
+        String matrix0 = "/home/florin/IdeaProjects/Viking/src/matrix0.txt";
+        Matrix.WriteZMatrix(Matrix.MatrixM(matrix0));
+
+        System.out.println("matrix2");
+
+        String matrix1 = "/home/florin/IdeaProjects/Viking/src/matrix1.txt";
+        Matrix.WriteZMatrix(Matrix.MatrixM(matrix1));
+
+
+        System.out.println("Matrixtest");
+        String matrixTest = "/home/florin/IdeaProjects/Viking/src/matrix.txt";
+        int [][] Matrixtest = Matrix.MatrixM(matrixTest);
+        for(int[] ints: Matrixtest){
+            for(int row = 0; row < Matrixtest[0].length; row++){
+                ints[row] = ints[row] +1;
+            }
+        }
+
+        Matrix.Write2FileMatrix(Matrixtest, matrixTest);
+
+
+
+        FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss2.txt");
         PrintWriter printWriter = new PrintWriter(fileWriter);
-    List< List<int []>> vecol = new ArrayList<>();
-     List<int []> vrow = new ArrayList<>() ;
-     for(int row = 0; row < 7; row++){
-     vrow.add(new int[]{row, 1});
-         System.out.println(vrow.get(row)[0]);
-         vecol.add(vrow);
-     }
+        List<List<int[]>> vecol = new ArrayList<>();
+        List<int[]> vrow = new ArrayList<>();
+        for (int row = 0; row < 7; row++) {
+            vrow.add(new int[]{row, 1});
+            System.out.println(vrow.get(row)[0]);
+            vecol.add(vrow);
+        }
 
-     for( int colon = 0; colon< 6; colon++){
-         for( int rol = 0; rol< 7; rol++){
-             System.out.printf("%10d,%2d",vecol.get(colon).get(rol)[0],colon*vecol.get(colon).get(rol)[1]);
-             printWriter.printf("%10d,%2d",vecol.get(colon).get(rol)[0],colon*vecol.get(colon).get(rol)[1]);
+        for (int rolon = 0; rolon < 6; rolon++) {
+            for (int crol = 0; crol < 7; crol++) {
+                System.out.printf("%10d,%2d", vecol.get(rolon).get(crol)[0], rolon * vecol.get(rolon).get(crol)[1]);
+                printWriter.printf("%3d", vecol.get(rolon).get(crol)[0]);
+                printWriter.printf("%3d", rolon * vecol.get(rolon).get(crol)[1]);
+                printWriter.print("\n");
 
 
- }
-         System.out.println("\n");
-         printWriter.println("\n");
-     }
-     printWriter.close();
+            }
+            System.out.println("\n");
+//            printWriter.println("\n");
+        }
+        printWriter.close();
+
+//        // print vecol size
+//        System.out.println("Vecol size :"+ vecol.size());
+//
+//        // print size of Matrix()
+//        System.out.println(Matrix.MatrixM().length);
+//
+//
+//        // print WinLoss1
+////        System.out.println("WinLoss1()");
+//
+//        for (int rolon = 0; rolon < 6; rolon++){
+//            for(int crol = 0; crol < 7; crol++){
+//                for( int drol = 0; drol< 2; drol++)
+//                System.out.print( Matrix.winloss3d2()[rolon][crol][drol]);
+//                System.out.println(",");
+//            }
+//            System.out.println("   ");
+//
+//            }
+//            System.out.println("\n");
+//        }
 
 
     }}
+
+
+
 
