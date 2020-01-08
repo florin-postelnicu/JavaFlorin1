@@ -1,5 +1,3 @@
-
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -117,12 +115,12 @@ public class ComputerPlayer implements IPlayer {
         int[][] myEddie;
 
 
-        if(MainConnect4.firstPlayer == 1){
-            myEddie= MainConnect4.matrix1();
+        if(VierGewinnt.firstPlayer == 1){
+            myEddie= MainConnects4.Matrix1;
 
         }
         else{
-            myEddie = MainConnect4.matrix2();
+            myEddie = MainConnects4.Matrix2;
         }
 
         return myEddie;
@@ -138,7 +136,7 @@ public class ComputerPlayer implements IPlayer {
             myVectorChoices.add(new int[]{valed, rowed, coled});
         }
 
-        return myVectorChoices;
+       return myVectorChoices;
     }
     public static int MaxOlista1(List<int[]> vec) {
         int max = 0;
@@ -194,7 +192,7 @@ public class ComputerPlayer implements IPlayer {
 
 
         System.out.println("I've been here!");
-        MainConnect4 vg = new MainConnect4();
+        MainConnects4 vg = new MainConnects4();
         int  col;
         col = MaxOlista1( VectorChoices(EddieMemory(),
                 Collections.unmodifiableList(vg.EddieChoices(board))));
