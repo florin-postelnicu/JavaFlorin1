@@ -73,7 +73,22 @@ class Matrix {
              }
          }
          return WinLoss;
-     }
+     }kastelka
+    
+     // Read a file from a file text.
+
+
+    public static ArrayList<Integer> Score( String filename) throws Exception{
+         ArrayList<Integer> score = new ArrayList<>();
+        try (Scanner s = new Scanner(new FileReader(filename))) {
+            while (s.hasNext()) {
+                score.add(s.nextInt());
+            }
+
+        }
+        return  score;
+
+    }
 
 
      // I am creating a Temp matrix
@@ -363,53 +378,59 @@ class Matrix {
 
 public class TestMatrixM {
     public static void main(String[] args) throws Exception {
-        System.out.println("Matrix1");
-
-        String matrix0 = "/home/florin/IdeaProjects/Viking/src/matrix0.txt";
-        Matrix.WriteZMatrix(Matrix.MatrixM(matrix0));
-
-        System.out.println("matrix2");
-
-        String matrix1 = "/home/florin/IdeaProjects/Viking/src/matrix1.txt";
-        Matrix.WriteZMatrix(Matrix.MatrixM(matrix1));
-
-
-        System.out.println("Matrixtest");
-        String matrixTest = "/home/florin/IdeaProjects/Viking/src/matrix.txt";
-        int [][] Matrixtest = Matrix.MatrixM(matrixTest);
-        for(int[] ints: Matrixtest){
-            for(int row = 0; row < Matrixtest[0].length; row++){
-                ints[row] = ints[row] +1;
-            }
-        }
-
-        Matrix.Write2FileMatrix(Matrixtest, matrixTest);
-
-
-
-        FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss2.txt");
-        PrintWriter printWriter = new PrintWriter(fileWriter);
-        List<List<int[]>> vecol = new ArrayList<>();
-        List<int[]> vrow = new ArrayList<>();
-        for (int row = 0; row < 7; row++) {
-            vrow.add(new int[]{row, 1});
-            System.out.println(vrow.get(row)[0]);
-            vecol.add(vrow);
-        }
-
-        for (int rolon = 0; rolon < 6; rolon++) {
-            for (int crol = 0; crol < 7; crol++) {
-                System.out.printf("%10d,%2d", vecol.get(rolon).get(crol)[0], rolon * vecol.get(rolon).get(crol)[1]);
-                printWriter.printf("%3d", vecol.get(rolon).get(crol)[0]);
-                printWriter.printf("%3d", rolon * vecol.get(rolon).get(crol)[1]);
-                printWriter.print("\n");
-
-
-            }
+    ArrayList<Integer> Scores = Matrix.Score("/home/florin/IdeaProjects/Viking/src/score.txt");
+        for( int i = 0; i < Scores.size(); i ++){
+            System.out.printf("%10d,%5d", Scores.get(i), i);
             System.out.println("\n");
-//            printWriter.println("\n");
+
         }
-        printWriter.close();
+//        System.out.println("Matrix1");
+//
+//        String matrix0 = "/home/florin/IdeaProjects/Viking/src/matrix0.txt";
+//        Matrix.WriteZMatrix(Matrix.MatrixM(matrix0));
+//
+//        System.out.println("matrix2");
+//
+//        String matrix1 = "/home/florin/IdeaProjects/Viking/src/matrix1.txt";
+//        Matrix.WriteZMatrix(Matrix.MatrixM(matrix1));
+//
+//
+//        System.out.println("Matrixtest");
+//        String matrixTest = "/home/florin/IdeaProjects/Viking/src/matrix.txt";
+//        int [][] Matrixtest = Matrix.MatrixM(matrixTest);
+//        for(int[] ints: Matrixtest){
+//            for(int row = 0; row < Matrixtest[0].length; row++){
+//                ints[row] = ints[row] +1;
+//            }
+//        }
+//
+//        Matrix.Write2FileMatrix(Matrixtest, matrixTest);
+//
+//
+//
+//        FileWriter fileWriter = new FileWriter("/home/florin/IdeaProjects/Viking/src/WinLoss2.txt");
+//        PrintWriter printWriter = new PrintWriter(fileWriter);
+//        List<List<int[]>> vecol = new ArrayList<>();
+//        List<int[]> vrow = new ArrayList<>();
+//        for (int row = 0; row < 7; row++) {
+//            vrow.add(new int[]{row, 1});
+//            System.out.println(vrow.get(row)[0]);
+//            vecol.add(vrow);
+//        }
+//
+//        for (int rolon = 0; rolon < 6; rolon++) {
+//            for (int crol = 0; crol < 7; crol++) {
+//                System.out.printf("%10d,%2d", vecol.get(rolon).get(crol)[0], rolon * vecol.get(rolon).get(crol)[1]);
+//                printWriter.printf("%10d,%3d", vecol.get(rolon).get(crol)[0], rolon * vecol.get(rolon).get(crol)[1]);
+//
+//
+//
+//
+//            }
+//            System.out.println("\n");
+//            printWriter.println("\n");
+//        }
+//        printWriter.close();
 
 //        // print vecol size
 //        System.out.println("Vecol size :"+ vecol.size());
