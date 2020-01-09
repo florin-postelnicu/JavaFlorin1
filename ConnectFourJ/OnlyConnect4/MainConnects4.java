@@ -17,8 +17,20 @@ public class MainConnects4
 
     private static Token[][] board = new Token[ COLS ][ ROWS ]; // 7 columns with 6 fields each
     private IPlayer[] players = new IPlayer[ 2 ]; // two players
+//
+//    public MainConnects4() throws Exception {
+//    }
 
-    public MainConnects4() throws Exception {
+    public static ArrayList<Integer> Score( String filename) throws Exception{
+        ArrayList<Integer> score = new ArrayList<>();
+        try (Scanner s = new Scanner(new FileReader(filename))) {
+            while (s.hasNext()) {
+                score.add(s.nextInt());
+            }
+
+        }
+        return  score;
+
     }
 
     // generic reader of a matrix from a file by providing filename
@@ -104,6 +116,19 @@ public class MainConnects4
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    // Generic write to file ArrayList
+
+    public static void Write2FileArrayL(ArrayList<Integer> arrayList, String filename) throws IOException {
+        BufferedWriter bw = new BufferedWriter(( new FileWriter(new File(filename))));
+        StringBuilder sb = new StringBuilder();
+        for( int i = 0; i < arrayList.size(); i++){
+            sb.append(arrayList.get(i)).append("          ");
+        }
+        bw.write(sb.toString());
+        bw.close();
+
     }
 
 
@@ -213,21 +238,21 @@ public class MainConnects4
         }
 
         /* initialize players */
-        players[ 0 ] = new HumanPlayer();
-//        players[0] = new ComputerPlayer();
-//        players[1] = new ComputerPlayer();
-        System.out.print( "Play against a human opponent? (y / n) " );
-        String opponent = new Scanner( System.in ).nextLine().toLowerCase();
-        while ( ( 1 != opponent.length() ) || (!"yn".contains(opponent)) ) {
-            System.out.print( "Can't understand your answer. Play against a human opponent? (y / n) " );
-            opponent = new Scanner( System.in ).nextLine().toLowerCase();
-        }
-        if ( opponent.equals( "y" ) ) {
-            players[ 1 ] = new HumanPlayer();
-        } else {
-            players[ 1 ] = new ComputerPlayer();
-            EddiePlayer = true;
-        }
+//        players[ 0 ] = new HumanPlayer();
+        players[0] = new ComputerPlayer();
+        players[1] = new ComputerPlayerR();
+//        System.out.print( "Play against a human opponent? (y / n) " );
+//        String opponent = new Scanner( System.in ).nextLine().toLowerCase();
+//        while ( ( 1 != opponent.length() ) || (!"yn".contains(opponent)) ) {
+//            System.out.print( "Can't understand your answer. Play against a human opponent? (y / n) " );
+//            opponent = new Scanner( System.in ).nextLine().toLowerCase();
+//        }
+//        if ( opponent.equals( "y" ) ) {
+//            players[ 1 ] = new HumanPlayer();
+//        } else {
+//            players[ 1 ] = new ComputerPlayer();
+//            EddiePlayer = true;
+//        }
         players[ 0 ].setToken( Token.player1 );
         players[ 1 ].setToken( Token.player2 );
 
