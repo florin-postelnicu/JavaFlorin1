@@ -13,6 +13,9 @@ public class ProjectForLoops3 {
         public String email;
         int ephone;
         public static ArrayList<Employees> listemp = new ArrayList<>();
+        public Employees(){
+
+        }
 
         public Employees(String name, String user, String password, int phone){
             this.ename = name;
@@ -62,15 +65,16 @@ public class ProjectForLoops3 {
         }
 
         public String getEmail() {
+            this.email = ename +"@mycompany.com";
             return email;
         }
 
         public static void main(String[] args) {
            Employees emp1 = new Employees("Caruso", "RealCaruso", "MayTrai",120634578);
 
-           Employees emp2 = new Employees("Pavarotti", "Tenorro", "LucianoP", 321654789);
+           Employees emp2 = new Employees("Pavarotti", "Tenorro_DelMundo", "LucianoP", 321654789);
 
-           Employees emp3 = new Employees("Silvianus", "SilvaMdres","Silva123*", 456123457);
+           Employees emp3 = new Employees("Silvia", "Silvia_Morriorty","Silva123*", 456123457);
 
 
            emp1.setEmail(emp1.ename);
@@ -94,10 +98,39 @@ public class ProjectForLoops3 {
             }
             }
             if( spy){
-                System.out.println("For Name :" + unknown + "  has the  Password " + diction.get(unknown).getEpassword());
+                System.out.println("The Employee :" + unknown + "  has the  Password: " + diction.get(unknown).getEpassword());
+                System.out.println("The Employee :" + unknown + "  has the  Username:   " + diction.get(unknown).getEuser());
+                System.out.println("The Employee :" + unknown + "  has the  Phone number:  " + diction.get(unknown).getEphone());
+                System.out.println("The Employee :" + unknown + "  has the  Email:   " + diction.get(unknown).getEmail());
             }
             else{
                 System.out.println("Our company did not hire this guy!");
+                System.out.println("\n Would you like to set an account him/her? Press y/n");
+                char yesno = scan.next().charAt(0) ;
+                if(yesno=='y')   {
+                    Employees empy = new Employees();
+                    empy.setEname(unknown);
+                    Scanner scan1 = new Scanner(System.in)  ;
+                    System.out.println("Enter user name for " + unknown);
+                    String useremp = scan1.nextLine();
+                    empy.setEuser(useremp);
+                    
+                    System.out.println("Enter Password for " + unknown);
+                    String pass = scan1.nextLine();
+                    empy.setEpassword(pass);
+                    System.out.println("Enter Phone Number  for " + unknown);
+                    int phon = scan1.nextInt();
+                    empy.setEphone(phon);
+
+                    listemp.add(empy) ;
+                    diction.put(unknown, empy)  ;
+                    empy.setEname(unknown);
+                    System.out.println("The email for  "+ unknown +  "is  "+ empy.getEmail());
+                }
+                else{
+                    System.out.println("Ok! I will see you next time! \n Have a nice day!");
+                }
+
             }
         }
     }
