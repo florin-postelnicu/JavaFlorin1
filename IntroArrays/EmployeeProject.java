@@ -124,15 +124,8 @@ public class EmployeeProject {
 
         public static void main(String[] args) throws Exception {
             listemp = Employees.Listofemployeesfile()  ;
-
-//            for(int j = 0; j< diction.size(); j++){
-//                String Name = listemp.get(j).ename;
-//                String Password = diction.get(Name).getEpassword();
-//                System.out.println("Name of emp from dictionary :" +Name + "  the  password  is" + Password);
-//            }
-//
             Scanner scan = new Scanner(System.in);
-            System.out.println("Enter the person's name to hey his Password ");
+            System.out.println("Enter the person's name to get his Password ");
             String unknown =scan.nextLine();
             boolean spy  = false;
             for( Employees emp : listemp){
@@ -147,8 +140,8 @@ public class EmployeeProject {
                 System.out.println("The Employee :" + unknown + "  has the  Email:   " + diction.get(unknown).getEmail());
             }
             else{
-                System.out.println("Our company did not hire this guy!");
-                System.out.println("\n Would you like to set an account him/her? Press y/n");
+                System.out.println("This is not our employee!");
+                System.out.println("\n Would you like to set an account for this person? Press y/n");
                 char yesno = scan.next().charAt(0) ;
                 if(yesno=='y')   {
                     Employees empy = new Employees();
@@ -167,13 +160,13 @@ public class EmployeeProject {
 
                     listemp.add(empy) ;
                     diction.put(unknown, empy)  ;
-                    empy.setEname(unknown);
+//                     empy.setEname(unknown);
                     System.out.println("The email for  "+ unknown +  "is  "+ empy.getEmail());
                     Employees.FileWriteEmps(empy);
 
                 }
                 else{
-                    System.out.println("Ok! I will see you next time! \n Have a nice day!");
+                    System.out.println("Ok! I will see you next time! \n\t Have a nice day!");
                 }
             }
         }
