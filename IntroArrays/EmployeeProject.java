@@ -82,7 +82,7 @@ public class EmployeeProject {
         }
 
 
-        public static ArrayList<Employees>Listofemployeesfile() throws Exception {
+        public static ArrayList<Employees>  Listofemployeesfile() throws Exception {
             
             FileReader fileReader = new FileReader("C://Users//postelnicu//IdeaProjects//MoreVectorsLists//src//ListEmployees.txt");
             Scanner scanner = new Scanner(new BufferedReader(fileReader));
