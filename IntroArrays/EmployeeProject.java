@@ -1,7 +1,7 @@
 
 
 import java.util.ArrayList;
-import  java.util.HashMap;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.io.*;
 
@@ -140,8 +140,8 @@ public class EmployeeProject {
                     empy.setEuser(userempy);
 
                     System.out.println("Enter Password for " + unknown);
-                    String passy = scan1.nextLine();
-                    empy.setEpassword(passy);
+                    String passwordy = scan1.nextLine();
+                    empy.setEpassword(passwordy);
                     System.out.println("Enter Phone Number  for " + unknown);
                     String phony = scan1.nextLine();
                     empy.setEphone(phony);
