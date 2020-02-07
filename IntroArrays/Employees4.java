@@ -1,4 +1,8 @@
 
+
+
+
+
 import java.util.ArrayList;
 import  java.util.HashMap;
 import java.util.Scanner;
@@ -145,11 +149,12 @@ public class Employees4 {
             System.out.println("Press 1 for  name ");
             System.out.println("Press 2 for user name ");
             System.out.println("Press 3 for password");
-            System.out.println("Press 4 for  phone");
+            System.out.println("Press 4 for  phone number");
 
             int trythis = scano.nextInt();
 
             switch (trythis){
+
                 case 1 :
                 {
                     String name = EnterData(0);
@@ -229,13 +234,23 @@ public class Employees4 {
                 {
                     System.out.println("You should use on of the numbers in the list : 1, 2, 3, 4 ");
                 }
-                break;
             }
         }
     }
 
     public static void main(String[] args) throws Exception {
+        boolean more = true;
+        Scanner sc = new Scanner(System.in);
+
+        while( more){
         Employees.CheckListOfEmployees();
+            System.out.println("Press y/n to continue");
+            char yesno = sc.next().charAt(0);
+            if( yesno != 'y'){
+              break;
+            }
+            }
+
     }}
 
 
