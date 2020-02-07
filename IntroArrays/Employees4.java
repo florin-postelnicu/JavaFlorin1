@@ -151,11 +151,11 @@ public class Employees4 {
             System.out.println("Press 3 for password");
             System.out.println("Press 4 for  phone number");
 
-            int trythis = scano.nextInt();
+            String trythis = scano.next();
 
             switch (trythis){
 
-                case 1 :
+                case "1" :
                 {
                     String name = EnterData(0);
                     boolean spy  = false;
@@ -174,7 +174,7 @@ public class Employees4 {
                     }
                     break;
                 }
-                case 2:
+                case "2":
                 {
                     String user = EnterData(1);
 
@@ -194,7 +194,7 @@ public class Employees4 {
                     }
                     break;
                 }
-                case 3:{
+                case "3":{
                     String password = EnterData(2);
                     boolean spy  = false;
                     Employees emppa = new Employees();
@@ -212,7 +212,7 @@ public class Employees4 {
                     }
                     break;
                 }
-                case 4: {
+                case "4": {
                     String phone = EnterData(3);
                     boolean spy  = false;
                     Employees emppa = new Employees();
@@ -244,10 +244,11 @@ public class Employees4 {
 
         while( more){
         Employees.CheckListOfEmployees();
-            System.out.println("Press y/n to continue");
+            System.out.println("If you want to do a search for another item press y/n");
             char yesno = sc.next().charAt(0);
+
             if( yesno != 'y'){
-              break;
+              more = false;
             }
             }
 
