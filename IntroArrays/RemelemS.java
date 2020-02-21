@@ -1,6 +1,6 @@
 /*
 the text for trial
-A Bottm u linneragee e altteraaashhh o hhurricanee
+A Bottm u linneragee e altteraaashhh o hhurricaneet
  */
 import java.util.Scanner;
 
@@ -16,6 +16,7 @@ public class RemelemS {
         //Create an char array
         char[] statechar = stateCon.toCharArray();
         int len = statechar.length;
+
         if(len <= 10){
             // do nothing to statechar
             System.out.println(statechar);
@@ -28,7 +29,8 @@ public class RemelemS {
             // make another char[] norepeats populated with the
             //elements of statechar that do not repeat
 
-            char[] norepaets = new char[len];
+            char[] norepaets = new char[len+1];
+            norepaets[len]=' ';
 
             // generate the index for the new array
             int index = 0;
@@ -44,6 +46,7 @@ public class RemelemS {
             }
             // eliminate the blanks at the end of norepeats
             char[] singles = new char[index+1];
+
             System.arraycopy(norepaets, 0, singles, 0, index + 1);
             System.out.println(norepaets);
             System.out.println(singles);
@@ -53,18 +56,29 @@ public class RemelemS {
             int lens = index +1;
             char[] novoelsing = new char[lens];
             int indnov = 1;
-            novoelsing[0]= singles[0];
-            for(int k = 1; k <index; k++){
-                if(singles[k-1] == singles[k+1] && singles[k+1] ==' '){
-                    novoelsing[indnov] = singles[k];
+//            novoelsing[0]= singles[0];
+            novoelsing[0] = norepaets[0];
+            novoelsing[index]= ' ';
+
+//            novoelsing[lens]=' ';
+
+            for(int k = 1; k <= index; k++){
+                if(norepaets[k-1] == norepaets[k+1] && norepaets[k+1] ==' '){
+                    novoelsing[indnov] = norepaets[k];
                     indnov ++;
                 }
-                else if (singles[k]!='a'&& singles[k]!='e'&& singles[k]!='i' && singles[k]!='o' && singles[k]!='u'){
-                    novoelsing[indnov]= singles[k];
+
+                else if (norepaets[k]!='a'&& norepaets[k]!='e'&& norepaets[k]!='i' && norepaets[k]!='o' && norepaets[k]!='u'){
+                    novoelsing[indnov]= norepaets[k];
                     indnov++;
                 }
+                else{
+                    novoelsing[indnov]= norepaets[k];
+                }
             }
-            System.out.println(novoelsing);
+
+
+
             char[] novelnorep = new char[indnov];
             System.arraycopy(novoelsing, 0, novelnorep, 0, indnov);
             System.out.println(novelnorep);
