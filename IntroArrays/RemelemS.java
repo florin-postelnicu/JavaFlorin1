@@ -25,10 +25,6 @@ public class RemelemS {
             System.out.println("Gime a sign !");
 
 
-            // eliminate the repeats from the statechar
-            // make another char[] norepeats populated with the
-            //elements of statechar that do not repeat
-
             char[] norepaets = new char[len+1];
             norepaets[len]=' ';
 
@@ -44,13 +40,7 @@ public class RemelemS {
                 }
                 norepaets[index]= statechar[len-1];
             }
-            // eliminate the blanks at the end of norepeats
-            char[] singles = new char[index+1];
-
-            System.arraycopy(norepaets, 0, singles, 0, index + 1);
-            System.out.println(norepaets);
-            System.out.println(singles);
-
+     
             //eliminate the vowels inside the words, but leave the singletons
 
             int lens = index +1;
@@ -76,13 +66,9 @@ public class RemelemS {
                     novoelsing[indnov]= norepaets[k];
                 }
             }
-
-
-
             char[] novelnorep = new char[indnov];
             System.arraycopy(novoelsing, 0, novelnorep, 0, indnov);
             System.out.println(novelnorep);
         }
-
     }
 }
